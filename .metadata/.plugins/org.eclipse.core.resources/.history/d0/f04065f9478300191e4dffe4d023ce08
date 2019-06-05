@@ -1,0 +1,10 @@
+package SErActive_3;
+
+public class RealResult extends Result<String>{
+
+	public Result<String> search(String word) {
+		
+		return null;
+	}
+
+}

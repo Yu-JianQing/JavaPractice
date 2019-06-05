@@ -1,0 +1,35 @@
+package SErActive_2;
+
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+
+public class ActiveObjectImp implements ActiveObject{
+	private final ExecutorService service=Executors.newSingleThreadExecutor();
+	
+	public Future<String> MakingString(int count, char fillchar) {
+		class MakingStringRequest implements Callable<String>{
+
+			public String call() throws Exception {
+				char buffer[]=new char[count];
+				for(int i=0;i<count;i++)
+					buffer[i]=fillchar;
+				String str=new String(buffer);
+				return str;
+			}
+			
+		}
+		
+		return service.submit(new MakingStringRequest());
+	}
+
+	public void DisplayString(String string) {
+		
+	}
+
+	public void shutdown() {
+		service.shutdown();
+	}
+
+}

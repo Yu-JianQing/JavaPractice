@@ -1,0 +1,7 @@
+package aboutFIle;
+
+public class ObjectInOut {
+	public static void main(String[] args) {
+		
+	}
+}

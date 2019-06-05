@@ -1,0 +1,13 @@
+package aboutUtil;
+
+public class aboutStringBuffer {
+	public static void main(String[] args) {
+		String str="xmnl  xml  html ";
+		String str2=str.trim();
+		System.out.println(str.hashCode()+"  "+str2.hashCode());
+		
+		StringBuffer sBuffer=new StringBuffer("xmnl  xml  html ");
+		StringBuffer sBuffer2=sBuffer.append("java");
+		System.out.println(sBuffer.hashCode()+"   "+sBuffer2.hashCode());
+	}
+}

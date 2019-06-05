@@ -1,0 +1,13 @@
+package aboutUtil;
+
+public class aboutRegex {
+	public static void main(String[] args) {
+		boolean bl1;
+		String str="hello tom ,hi i am jerry.   CAT AND MOUSE  111589112";
+		
+		String regex1="[0-9]";
+		
+		bl1=str.matches(regex1);
+		System.out.println(bl1);System.out.println(str.split(regex1));
+	}
+}

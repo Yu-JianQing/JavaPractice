@@ -1,0 +1,28 @@
+package SanShuJu_3;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class VoteService {//服务器返回信息使用
+	private Map<Integer, Long> result=new HashMap<Integer, Long>();//存放id 和 获得的投票数
+	
+	public VoteMsg handleRequest(VoteMsg msg){
+		if(msg.isResponse())//如果信息是要返回的信息则不用再操作
+			return msg;
+		
+		msg.setResponse(true);//不是就设置成是
+		
+		int candidate=msg.getCandidateID();//从信息中获取到id
+		Long count=result.get(candidate);//从map中拿到相应id对应的投票数count
+		
+		if(count==null)
+			count=0L;
+		
+		if(!msg.isQuerry())
+			result.put(candidate, ++count);
+		
+		msg.setVoteCount(count);
+		
+		return msg;
+	}
+}

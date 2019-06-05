@@ -1,0 +1,28 @@
+package YiSTE_2;
+
+public class EaterThread extends Thread{
+	private final Tool leftHand;
+	private final Tool rightTool;
+	private String personName;
+	
+	public EaterThread(String personName,Tool leftHand,Tool rightHand) {
+		this.leftHand=leftHand;
+		this.rightTool=rightHand;
+		this.personName=personName;
+	}
+	
+	public synchronized void eat(){
+		System.out.println(this.personName+"拿起"+this.leftHand);
+		System.out.println(this.personName+"拿起"+this.rightTool);
+		System.out.println("吃饭");
+		System.out.println(this.personName+"放下"+this.leftHand);
+		System.out.println(this.personName+"放下"+this.rightTool);
+	}
+	
+	public void run(){
+		while(true){
+			this.eat();
+		}
+	}
+	
+}

@@ -1,0 +1,21 @@
+package SanShuJu_3;
+
+import java.io.IOException;
+
+public class VoteMsgBinCoder implements VoteMsgCoder{		//以二进制方式对信息进行编码
+	public static final int Min_Wire_Lenth=4;
+	public static final int Max_Wire_Lenth=16;
+	public static final int Magic=0x5400;
+	public static final int MagicShift=8;
+	public static final int ResponseFlag=0x0200;
+	public static final int InQuerryFlag=0x0100;
+
+	public byte[] toWire(VoteMsg msg) throws IOException {
+		return null;
+	}
+
+	public VoteMsg fromWire(byte[] msg) throws IOException {
+		return null;
+	}
+	
+}

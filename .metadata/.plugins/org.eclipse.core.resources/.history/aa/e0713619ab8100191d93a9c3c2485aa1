@@ -1,0 +1,5 @@
+package SErActive;
+
+public interface ActiveObject {
+	public abstract Result<string> makeString(int count,char fillchar);
+}

@@ -1,0 +1,27 @@
+package YiSTE;
+
+public class Gate {
+	private int count=0;
+	private String Pname="Nobody";
+	private String Paddress="Nowhere";
+	
+	public void pass(String Pname,String Paddress){
+		this.count++;
+		this.Pname=Pname;
+		try {
+			Thread.sleep(1000);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		this.Paddress=Paddress;
+		if(Pname.charAt(0)==Paddress.charAt(0)){
+			System.out.println(Pname.charAt(0));System.out.println(Paddress.charAt(0));
+			System.out.println("*******broken********"+toString());
+			}
+		
+	}
+	
+	public String toString(){
+		return "No."+count+":"+Pname+","+Paddress;
+	}
+}

@@ -1,0 +1,17 @@
+package aboutUtil;
+
+import java.util.Scanner;
+
+public class aboutScanner {//Scanner：扫描器
+	public static void main(String[] args) {
+		String str="hello tom ,hi i am jerry.   CAT AND MOUSE  111589112";
+		
+		String regex="[^0123456789.]+";//scanner不仅用于解析字符串，还可解析流、文件等//注意与stringtokenizer的区别P194
+		Scanner scanner=new Scanner(str);
+		
+		while(scanner.hasNext()){
+			String string=scanner.next();
+			System.out.println(string);
+		}
+	}
+}

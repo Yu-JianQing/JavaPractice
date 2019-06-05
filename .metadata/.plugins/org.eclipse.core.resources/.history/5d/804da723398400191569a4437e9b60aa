@@ -1,0 +1,21 @@
+package aboutUtil;
+
+public class aboutRegex {
+	public static void main(String[] args) {
+		boolean bl1;
+		String str="hello tom ,hi i am jerry.   CAT AND MOUSE  111589112";
+		
+		String regex1="[0-9]";
+		String regex2="[a-z]";
+		String regex3="[a-zA-Z]";
+		String regex4="[3-4a-d]";
+		
+//		String [] strings=str.split(regex1);
+//		String [] strings=str.split(regex2);
+//		String [] strings=str.split(regex3);
+		String [] strings=str.split(regex4);
+		for(String string:strings)
+			System.out.println(string);
+		
+	}
+}

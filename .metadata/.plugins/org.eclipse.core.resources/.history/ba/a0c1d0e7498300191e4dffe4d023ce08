@@ -1,0 +1,13 @@
+package SErActive_3;
+
+public class FutureResult extends Result<String>{
+	private RealResult realResult;
+	
+	public String getValue() {
+		return this.realResult.getValue();
+	}
+
+	public void set(RealResult realResult){
+		this.realResult=realResult;
+	}
+}

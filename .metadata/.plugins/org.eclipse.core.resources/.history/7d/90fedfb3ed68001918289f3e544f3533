@@ -1,0 +1,18 @@
+package YiSTE_2;
+
+public class EaterThread_2 extends Thread{
+	
+	private String personName;
+	
+	public EaterThread_2(String personName) {
+		
+		this.personName=personName;
+	}
+	
+	
+	
+	public void run(){
+		
+	}
+	
+}

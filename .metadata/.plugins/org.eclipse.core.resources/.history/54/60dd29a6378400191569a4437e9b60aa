@@ -1,0 +1,7 @@
+package aboutUtil;
+
+public class aboutRegex {
+	public static void main(String[] args) {
+		String string="hello tom ,hi i am jerry.   cat and laoshu  111111112";//mouse
+	}
+}

@@ -1,0 +1,19 @@
+package SErActive;
+
+public class FutureResult<T> extends Result<T>{
+	private RealResult<T> realResult;
+	private boolean ready=false;
+	
+	public FutureResult(T resultValue){
+		this.realResult=new RealResult<T>(resultValue);
+	}
+	
+	public synchronized T getResultValue() {
+		try {
+			if(!ready)
+				wait();
+		} catch (InterruptedException e) {}
+		return this.realResult.getResultValue();
+	}
+
+}

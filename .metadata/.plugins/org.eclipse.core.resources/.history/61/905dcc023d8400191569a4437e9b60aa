@@ -1,0 +1,7 @@
+package aboutUtil;
+
+public class aboutScanner {//Scanner£ºÉ¨ÃèÆ÷
+	public static void main(String[] args) {
+		
+	}
+}

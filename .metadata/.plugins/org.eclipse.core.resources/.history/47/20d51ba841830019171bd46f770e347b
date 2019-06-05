@@ -1,0 +1,20 @@
+package SErActive_2;
+
+public class AddClientThread extends Thread{
+	private final  ActiveObject activeObject;
+	
+	public AddClientThread(ActiveObject activeObject,String name){
+		super(name);
+		this.activeObject=activeObject;
+	}
+	
+	public void run(){
+		int i=1,j=1;
+		String x=String.valueOf(i);
+		String y=String.valueOf(j);
+		while(true){
+			activeObject.Add(x, y);
+		}
+	}
+	
+}

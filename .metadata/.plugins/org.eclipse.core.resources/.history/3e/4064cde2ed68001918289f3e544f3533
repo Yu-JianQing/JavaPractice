@@ -1,0 +1,9 @@
+package YiSTE_2;
+
+public class Main_2 {
+	public static void main(String[] args) {
+		Tool_2 spoon=new Tool_2("spoon");
+		Tool_2 fork=new Tool_2("fork");
+		
+	}
+}

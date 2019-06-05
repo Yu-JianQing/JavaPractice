@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<libraryInfos>
+<libraryInfo home="D:\Java-api及反编译\JKD\JDK-file" version="1.8.0_161">
+<bootpath>
+<entry path="D:\Java-api及反编译\JKD\JDK-file\jre\lib\resources.jar"/>
+<entry path="D:\Java-api及反编译\JKD\JDK-file\jre\lib\rt.jar"/>
+<entry path="D:\Java-api及反编译\JKD\JDK-file\jre\lib\sunrsasign.jar"/>
+<entry path="D:\Java-api及反编译\JKD\JDK-file\jre\lib\jsse.jar"/>
+<entry path="D:\Java-api及反编译\JKD\JDK-file\jre\lib\jce.jar"/>
+<entry path="D:\Java-api及反编译\JKD\JDK-file\jre\lib\charsets.jar"/>
+<entry path="D:\Java-api及反编译\JKD\JDK-file\jre\lib\jfr.jar"/>
+<entry path="D:\Java-api及反编译\JKD\JDK-file\jre\classes"/>
+</bootpath>
+<extensionDirs>
+<entry path="D:\Java-api及反编译\JKD\JDK-file\jre\lib\ext"/>
+<entry path="C:\WINDOWS\Sun\Java\lib\ext"/>
+</extensionDirs>
+<endorsedDirs>
+<entry path="D:\Java-api及反编译\JKD\JDK-file\jre\lib\endorsed"/>
+</endorsedDirs>
+</libraryInfo>
+</libraryInfos>
