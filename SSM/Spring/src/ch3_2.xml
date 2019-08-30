@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/context
+			http://www.springframework.org/schema/context/spring-context.xsd
+			http://www.springframework.org/schema/aop
+			http://www.springframework.org/schema/aop/spring-aop.xsd
+			http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/util
+			http://www.springframework.org/schema/util/spring-util.xsd">
+	<!-- 以上是属性说明 -->
+	
+	<!-- <bean id="cat" class="ch3_2.Cat" scope="prototype"></bean>将bean设为原型bean
+	
+	<bean id="cart1" class="ch3_2.Cart1" scope="session">将bean的作用域设为session
+		<aop:scoped-proxy/>注入bean的代理为基于类的代理模式 (默认)
+	</bean>
+	
+	
+	<bean id="cart" class="ch3_2.Cart" scope="session">将bean的作用域设为session
+		<aop:scoped-proxy proxy-target-class="false"/>注入bean的代理为基于接口的代理模式
+	</bean>
+	
+	
+	<context:property-placeholder/>用于解析占位符时必须要用的
+	<bean id="store" class="ch3_2.Store" c:_name="${name}" c:_age="{$age}"></bean>
+	利用占位符｛$属性名｝来获取属性值
+	
+	
+	以下是el表达式
+		#{1}	#{'ss'} 结果是1和ss
+		#{store.name}	store是bean的id，有了bean就可以访问bean中的属性及方法
+		#{T(java.long.MATH).PI}	T()运算的结果是一个class对象，则可以访问此class对象中的静态属性或方法
+		#{T(java.long.MATH).PI*circle.r^2}el表达式可以计算乘方等其他运算
+		#{store.name eq xxx}利用eq可以进行字符串比较，同equals方法
+		#{store.age>10?"yes":"no"}el表达式支持三目运算
+		#{admin.email matches '[0-9]+@[0-9.]+\\.com'}利用matches支持正则表达式的匹配
+		#{'i am tom'[2]}支持用【】来从集合中获取元素，此处是获取字符串中的第三个元素
+		
+		
+		支持集合运算
+		#{foods.?[name eq 'apple']}集合.?[条件]将集合中符合条件的拿出来作为一个子集 
+		#{foods.^[name eq 'apple']}集合.^[条件]将集合中符合条件的第一项拿出来 
+		#{foods.$[name eq 'apple']}集合.$[条件]将集合中符合条件的最后一项拿出来 
+		#{foods.![name]}集合.![条件] 投影运算，将集合中某一属性拿出来作为一个子集 
+		 -->
+		
+	
+</beans>

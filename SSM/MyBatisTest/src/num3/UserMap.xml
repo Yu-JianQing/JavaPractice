@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="num3.UserMap">
+	<select id="selectUserByUid1" parameterType="Integer" resultType="num3.User">
+		select * from user where uid=#{uid}
+	</select>
+	
+	<select id="selectUserByUid2" parameterType="map" resultType="num3.User">
+		select * from user where uid=#{uid}
+	</select>
+	
+	<select id="selectAllUsers1" resultType="num3.User">
+		select * from user
+	</select>
+	
+	<select id="selectAllUsers2" resultType="map">
+		select * from user
+	</select>
+	
+	
+	<update id="updateAUser" parameterType="num3.User">
+		update user set uname=#{uname},usex=#{usex} where uid=#{uid}
+	</update>
+	
+	
+	<delete id="deleteAUser" parameterType="num3.User">
+		delete from user where uid=#{uid}
+	</delete>
+	
+	
+	<insert id="insertAUser1" parameterType="num3.User">
+		insert into user values(#{uid},#{uname},#{usex})
+	</insert>
+	
+	<insert id="insertAUser2" parameterType="num3.User" keyProperty="uid" useGeneratedKeys="true">
+		insert into user values(#{uname},#{usex})
+	</insert>
+	
+	<insert id="insertAUser3" parameterType="num3.User">
+		<selectKey keyProperty="uid" resultType="Integer" order="BEFORE">
+			select if(max(uid) is null,1,max(uid)+1) as newUid from user
+		</selectKey>
+		insert into user values(#{uid},#{uname},#{usex})
+	</insert>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ch2.StudentMap">
+	<select id="selectStudentBySno" parameterType="Integer" resultType="ch2.Student">
+		select * from student where sno=#{sno}
+	</select>
+	
+	<select id="selectAllStudent" resultType="ch2.Student">
+		select * from student
+	</select>
+	
+	<insert id="addStudent" parameterType="ch2.Student">
+		insert into student values(#{sno},#{sname},#{sex},#{sage},#{sdept})
+	</insert>
+	
+	<update id="updateStudent" parameterType="ch2.Student">
+		update student set sname=#{sname},sex=#{sex} where sno=#{sno}
+	</update>
+	
+	<delete id="deleteStudent" parameterType="Integer">
+		delete from student where sno=#{sno}
+	</delete>
+	
+</mapper>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="num6.OrderMap">
+	<resultMap type="num6.Order" id="rs">
+		<id property="id" column="id"/>
+		<result property="oid" column="orders_id"/>
+		
+		<collection property="products" ofType="num6.Product">
+			<id property="pid" column="id"/>
+			<result property="name" column="name"/>
+			<result property="price" column="price"/>
+		</collection>
+	</resultMap>
+	
+	<select id="selectAllOrders" resultMap="rs">
+		select o.*,p.name,p.price
+		from orders_detail o,product p
+		where o.product_id=p.id
+	</select>
+</mapper>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ch6.UserMap">
+	
+	<resultMap type="ch6.User" id="rs1">
+		<id property="uid" column="uid"/>
+		<result property="uname" column="uname"/>
+		<result property="usex" column="usex"/>
+		
+		<collection property="orders" ofType="ch6.Orders" column="uid"
+						select="ch6.OrdersMap.selectOrdersByUId"/>
+	</resultMap>
+	
+	<select id="selectUserOrderByUId1" parameterType="Integer" resultMap="rs1">
+		select * from user where uid=#{uid}
+	</select>
+	
+	
+	<resultMap type="ch6.User" id="rs2">
+		<id property="uid" column="uid"/>
+		<result property="uname" column="uname"/>
+		<result property="usex" column="usex"/>
+		
+		<collection property="orders" ofType="ch6.Orders">
+			<id property="id" column="id"/>
+			<result property="order" column="order"/>
+		</collection>
+	</resultMap>
+	
+	<select id="selectUserOrderByUId2" parameterType="Integer" resultMap="rs2">
+		select u.*,o.id,o.order
+		from user u,orders o
+		where u.uid=o.uid and u.uid=#{uid}
+	</select>
+	
+	<select id="selectUserOrderByUId3" parameterType="Integer" resultType="ch6.RS">
+		select u.*,o.id,o.order
+		from user u,orders o
+		where u.uid=o.uid and u.uid=#{uid}
+	</select>
+	
+</mapper>

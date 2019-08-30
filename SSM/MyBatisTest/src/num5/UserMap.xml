@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="num5.UserMap">
+
+	<resultMap type="num5.User" id="rs1">
+		<id property="uid" column="uid"/>
+		<result property="uname" column="uname"/>
+		<result property="usex" column="usex"/>
+		
+		<collection property="orders" column="uid" ofType="num5.Orders" select="num5.OrdersMap.selectOrdersByUId"/>
+	</resultMap>
+
+	<select id="selectAllUsers1" resultMap="rs1">
+		select * from user
+	</select>
+	
+	<!-- <select id="selectAllUsers2"></select> -->
+	
+</mapper>

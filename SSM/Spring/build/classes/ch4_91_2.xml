@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/context
+			http://www.springframework.org/schema/context/spring-context.xsd
+			http://www.springframework.org/schema/aop
+			http://www.springframework.org/schema/aop/spring-aop.xsd
+			http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/util
+			http://www.springframework.org/schema/util/spring-util.xsd">
+	<!-- 以上是属性说明 -->
+	
+	
+	
+	<bean id="actor" class="ch4_91.Actor"/>
+	<bean id="audience" class="ch4_91.Audience"/>
+	
+	<aop:config>
+		<aop:aspect ref="audience">
+			<aop:pointcut expression="execution(* ch4_91.Performance.perform(..))" id="perform"/>
+		
+			<aop:before pointcut-ref="perform" method="BeforePerform"/>
+			<aop:before pointcut-ref="perform" method="Sit"/>
+			<aop:after pointcut-ref="perform" method="AfterPerform"/>
+			<aop:after-throwing pointcut-ref="perform" method="PerformError"/>
+		</aop:aspect>
+	</aop:config>
+	
+	
+	
+	
+	</beans>

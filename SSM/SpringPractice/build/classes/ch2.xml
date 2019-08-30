@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/context
+			http://www.springframework.org/schema/context/spring-context.xsd
+			http://www.springframework.org/schema/aop
+			http://www.springframework.org/schema/aop/spring-aop.xsd
+			http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/util
+			http://www.springframework.org/schema/util/spring-util.xsd">
+	<!-- 以上是属性说明 -->
+	
+	<bean id="myTestDIDao" class="ch2.TestDIDaoImpl"></bean>
+	
+	<!-- 构造法注入 -->
+	<bean id="testDIService" class="ch2.TestDIServiceImpl">
+		<constructor-arg index="0" ref="myTestDIDao"/>
+	</bean>
+	
+	<!-- set法注入 -->
+	<bean id="testDIService2" class="ch2.TestDIServiceImpl2">
+		<property name="tDao" ref="myTestDIDao"/>
+	</bean>
+	
+</beans>

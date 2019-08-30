@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/context
+			http://www.springframework.org/schema/context/spring-context.xsd
+			http://www.springframework.org/schema/aop
+			http://www.springframework.org/schema/aop/spring-aop.xsd
+			http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/util
+			http://www.springframework.org/schema/util/spring-util.xsd">
+	<!-- 以上是属性说明 -->
+	
+	
+	<bean id="numPrintImp" class="ch4_92.NumPrintImp">
+		<constructor-arg value="66666"/>
+	</bean>
+	<bean id="counter" class="ch4_92.Counter">
+		<property name="map">
+			<map>
+				<entry key="1" value="1"/>
+				<entry key="2" value="2"/>
+				<entry key="3" value="3"/>
+			</map>
+		</property>
+	</bean>
+		
+	
+	<aop:config>
+		<aop:aspect ref="counter">
+			<aop:pointcut expression="execution(* ch4_92.NumPrint.print(int)) and args(num)"
+																		 id="print"/>
+			<aop:before pointcut-ref="print" method="count"/>
+			<aop:after pointcut-ref="print" method="count2"/>
+			<aop:around pointcut-ref="print" method="count3"/>
+		</aop:aspect>
+	</aop:config>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</beans>

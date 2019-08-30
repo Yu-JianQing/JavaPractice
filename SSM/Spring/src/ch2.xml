@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/context
+			http://www.springframework.org/schema/context/spring-context.xsd
+			http://www.springframework.org/schema/aop
+			http://www.springframework.org/schema/aop/spring-aop.xsd
+			http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/util
+			http://www.springframework.org/schema/util/spring-util.xsd">
+	<!-- 以上是属性说明 -->
+	
+	
+	<!-- <context:component-scan base-package="ch2"/>  这是属于用xml自动化装配bean-->
+	
+	<!-- 以下是bean注入 -->
+	<bean id="dog" class="ch2.Dog"></bean><!-- 声明bean -->
+	<bean id="tom" class="ch2.Tom">
+		<constructor-arg ref="dog"></constructor-arg><!-- 注入bean -->
+	</bean>
+	
+	<bean id="tom2" class="ch2.Tom" c:animal-ref="dog"></bean><!-- 使用c命名空间注入bean -->
+	<bean id="tom3" class="ch2.Tom" c:_0-ref="dog"></bean><!-- 使用c命名空间的另一种方式注入bean -->
+	
+	
+	<bean id="jerry" class="ch2.Jerry">
+		<constructor-arg value="jerry"/><!-- 注入字面量值  -->
+		<constructor-arg value="man"/>
+		<!-- <constructor-arg><null></null></constructor-arg>   给list参数传入null-->
+		<constructor-arg>
+			<list>                     <!-- 给形参传入list参数，c命名空间不具备此功能 -->
+				<value>one</value>
+				<value>two</value>
+				<value>three</value>
+			</list>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="jerry2" class="ch2.Jerry" 
+		c:_name="jerry" c:_sex="man"/>	<!-- 使用c命名空间注入字面量值 -->
+	<bean id="jerry3" class="ch2.Jerry"
+		c:_0="jerry" c:_1="man"/>	<!-- 使用c命名空间的另一种方式注入字面量值 -->
+		
+		
+	<!-- 以下是属性注入 -->	
+	<bean id="tom4" class="ch2.Tom">
+		<property name="animal" ref="dog"></property><!-- bean属性注入，利用了set方法 -->
+	</bean>
+	
+	<bean id="tom5" class="ch2.Tom" p:animal-ref="dog"/>	<!-- bean属性注入，p命名空间法，利用了set方法 -->
+	
+	<bean id="jerry4" class="ch2.Jerry">
+		<property name="name" value="jerry"/><!-- 普通属性注入，利用了set方法 -->
+		<property name="sex" value="man"/>
+		<property name="foods">
+			<list>
+				<value>one</value>
+				<value>two</value>
+				<value>three</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="jerry5" class="ch2.Jerry" p:name="jerry" p:sex="man"><!-- 普通属性注入，p命名空间法，利用了set方法 -->
+		<property name="foods">
+			<list>
+				<value>one</value>
+				<value>two</value>
+				<value>three</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 属性注入，util命名空间法 -->
+	<util:list id="foods">
+		<value>one</value>
+		<value>two</value>
+		<value>three</value>
+	</util:list>
+	<bean id="jerry6" class="ch2.Jerry">
+		<property name="name" value="jerry"/>
+		<property name="sex" value="man"></property>
+		<property name="foods" ref="foods"></property>
+	</bean>
+</beans>

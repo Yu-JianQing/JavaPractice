@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ch3.UserMap">
+	
+	<select id="selectById" parameterType="Integer" resultType="ch3.User">
+		select * from user where uid=#{uid}
+	</select>
+	
+	<select id="selectAll" resultType="ch3.User">
+		select * from user
+	</select>
+	
+	<select id="selectApart" resultType="ch3.User" parameterType="map">
+		select * from user where uname like concat('%',#{u_name},'%') and usex=#{usex}
+	</select>
+	
+	<insert id="insertUser" parameterType="ch3.User"><!-- 普通插入 -->
+		insert into user values(#{uid},#{uname},#{usex})
+	</insert>
+	
+	<!-- <insert id="insertUser2" keyProperty="uid" useGeneratedKeys="true" parameterType="ch3.User">
+		insert into user values(#{uname},#{usex})主键自动生成回填式插入
+	</insert> -->
+	
+	<insert id="insertUser2" parameterType="ch3.User"><!-- 主键手动生成回填式插入 -->
+		<selectKey keyProperty="uid" resultType="Integer" order="BEFORE">
+			select if(max(uid) is null,1,max(uid)+1) as newUid from user
+		</selectKey>
+		insert into user values(#{uid},#{uname},#{usex})
+	</insert>
+	
+	<sql id="colNames">uid,uname,usex</sql>
+	<select id="selectById2" parameterType="Integer" resultType="ch3.User">
+		select <include refid="colNames"/> from user where uid=#{uid}
+	</select>
+	
+	<select id="selectAll2" resultType="map">
+		select * from user
+	</select>
+	
+</mapper>

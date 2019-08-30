@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MMA.DetailDao">
+	
+	<resultMap type="Test.Detail" id="drs">
+		<id property="dno" column="dno"/>
+		<result property="uno" column="uno"/>
+		<result property="count" column="count"/>
+		<result property="sum" column="sum"/>
+		<result property="time" column="time"/>
+		<association property="product" javaType="Test.Product" column="pno" select="MMA.ProductDao.selectProductByPno"/>
+	</resultMap>
+	<select id="selectDetailByDno" parameterType="Integer" resultMap="drs">
+		select * from detail
+		<where>
+			dno=#{dno}
+		</where>
+	</select>
+	
+	<select id="selecAllDetails" resultMap="drs">
+		select * from detail
+	</select>
+	
+	<select id="selectTime" resultType="java.util.Date">
+		select time from detail where dno=1
+	</select>
+	
+	<select id="selectSQLTime" resultType="java.sql.Date">
+		select time from detail where dno=1
+	</select>
+	
+</mapper>

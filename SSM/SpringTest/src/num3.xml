@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/context
+			http://www.springframework.org/schema/context/spring-context.xsd
+			http://www.springframework.org/schema/aop
+			http://www.springframework.org/schema/aop/spring-aop.xsd
+			http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/util
+			http://www.springframework.org/schema/util/spring-util.xsd">
+	<!-- 以上是属性说明 -->
+	
+	<bean id="book" class="num3.Book"/>
+	<bean id="tom" class="num3.Tom">
+		<constructor-arg ref="book"></constructor-arg>
+	</bean>
+	
+	<bean id="tom1" class="num3.Tom" c:_0-ref="book" />
+	
+	
+	
+	<bean id="jerry" class="num3.Jerry">
+		<constructor-arg value="jerry"/>
+		<constructor-arg>
+			<map>
+				<entry key="1" value="j1"/>
+				<entry key="2" value="j2"/>
+			</map>
+		</constructor-arg>
+		<constructor-arg ref="book"/>
+	</bean>
+	
+	<bean id="jerry1" class="num3.Jerry" >
+		<property name="name" value="jerry1"/>
+		<property name="hobbies">
+			<map>
+				<entry key="1" value="j3"/>
+				<entry key="2" value="j4"/>
+			</map>
+		</property>
+		<property name="book" ref="book"/>
+	</bean>
+	
+</beans>

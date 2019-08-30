@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>表单测试</title>
+</head>
+<body style="">
+	<!-- <form action="saveInfo.do" method="get"> -->
+	<form action="result.jsp" method="get">	<!-- method决定了使用什么方法 -->
+		<table>
+			<tr>
+				<td colspan="2">个人信息</td>
+			</tr>
+			<tr>
+				<td>用户名</td>
+				<td><input type="text" name="name"></td>
+			</tr>
+			<tr>
+				<td>密码</td>
+				<td><input type="password" name="password"></td>
+			</tr>
+			<tr>
+				<td>性别</td>
+				<td>
+					<input type="radio" name="sex" value="F">女
+					<input type="radio" name="sex" value="N">男
+				</td>
+			</tr>
+			<tr>
+				<td>爱好</td>
+				<td>
+					<input type="checkbox" name="habbies" value="football">football
+					<input type="checkbox" name="habbies" value="basketball">basketball
+					<input type="checkbox" name="habbies" value="pingpang">pingpang
+				</td>
+			</tr>
+			<tr>
+				<td>省份</td>
+				<td>
+					<select name="province">
+						<option value="jiangsu">江苏</option>
+						<option value="anhui">安徽</option>
+						<option value="gansu">甘肃</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>个人简介</td>
+				<td>
+					<textarea name="info" rows="10" cols="20"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="提交"></td>
+				<td><input type="reset" value="重置"></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

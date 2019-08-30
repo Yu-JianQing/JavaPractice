@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MMA.UserDao">
+	<insert id="insertUser" parameterType="Test.User" useGeneratedKeys="true" keyProperty="uno">
+		insert into user(uname,pwd,tel,address) values(#{uname},#{pwd},#{tel},#{address})
+	</insert>
+	
+	<insert id="insertUserByPeople" parameterType="Test.User">
+		<selectKey keyProperty="uno" resultType="Integer" order="AFTER">
+			select if(max(uno) is null,1,max(uno)+1) as newuno from user
+		</selectKey>
+		insert into user values(#{uno},#{uname},#{pwd},#{tel},#{address})
+	</insert>
+</mapper>

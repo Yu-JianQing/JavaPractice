@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="num4.PersonMap">
+
+	<resultMap type="num4.Person" id="rs1">
+		<id property="id" column="id"/>
+		<result property="name" column="name"/>
+		<result property="age" column="age"/>
+		
+		<association property="card" column="card_id" javaType="num4.IdCard" select="num4.IdCardMap.selectCardById"/>
+	</resultMap>
+
+	<select id="selectAllPersons1" resultMap="rs1">
+		select * from person
+	</select>
+	
+	
+	<resultMap type="num4.Person" id="rs2">
+		<id property="id" column="id"/>
+		<result property="name" column="name"/>
+		<result property="age" column="age"/>
+		
+		<association property="card" javaType="num4.IdCard">
+			<id property="id" column="id"/>
+			<result property="code" column="code"/>
+		</association>
+	</resultMap>
+
+	<select id="selectAllPersons2" resultMap="rs2">
+		select p.*,c.code
+		from idcard c,person p
+		where p.card_id=c.id
+		<!-- select * from person where id in (select id from idcard) -->
+	</select>
+</mapper>

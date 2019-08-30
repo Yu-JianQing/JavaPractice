@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ch5.PersonMap">
+	<resultMap type="ch5.Person" id="rs1">
+		<id property="id" column="id"/>
+		<result property="name" column="name"/>
+		<result property="age" column="age"/>
+		
+		<association property="card" column="card_id" javaType="ch5.IdCard" 
+										select="ch5.IdCardMap.selectCodeById"/>
+	</resultMap>
+	
+	<select id="selectPersonById1" parameterType="Integer" resultMap="rs1">
+		select * from person where id=#{id}
+	</select>
+	
+	
+	<resultMap type="ch5.Person" id="rs2">
+		<id property="id" column="id"/>
+		<result property="name" column="name"/>
+		<result property="age" column="age"/>
+		
+		<association property="card" javaType="ch5.IdCard">
+			<id property="id" column="card_id"/>
+			<result property="code" column="code"/>
+		</association>
+	</resultMap>
+	
+	<select id="selectPersonById2" parameterType="Integer" resultMap="rs2">
+		select p.*,ic.code
+		from person p,idcard ic
+		where p.card_id=ic.id and p.id=#{id}
+	</select>
+	
+	<select id="selectPersonById3" parameterType="Integer" resultType="ch5.RS">
+		select p.*,ic.code
+		from person p,idcard ic
+		where p.card_id=ic.id and p.id=#{id}
+	</select>
+	
+</mapper>

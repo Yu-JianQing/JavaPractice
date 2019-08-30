@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="num2.StuMap">
+	<select id="selectBySno" parameterType="Integer" resultType="num2.Student">
+		select * from student where sno=#{sno}
+	</select>
+	
+	<insert id="addStudent" parameterType="num2.Student">
+		insert into student values(#{sno},#{sname},#{sex},#{sage},#{sdept})
+	</insert>
+</mapper>

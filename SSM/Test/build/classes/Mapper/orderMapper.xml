@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MMA.OrderDao">
+	
+	<resultMap type="Test.Order" id="rs">
+		<id property="rno" column="rno"/>
+		<result property="status" column="status"/>
+		<collection property="details" ofType="Test.Detai" column="dno" select="MMA.DetailDao.selectDetailByDno"></collection>
+	</resultMap>
+	
+	<select id="seleOrderByRno" parameterType="Integer" resultMap="rs">
+		select * from `order`
+		<where>
+			rno=#{rno}
+		</where>
+	</select>
+	
+	<select id="selectAllOrders" resultMap="rs">
+		select * from `order`
+	</select>
+</mapper>

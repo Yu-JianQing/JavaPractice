@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd">
+
+<diskStore path="C:\Users\USER\Desktop\文件暂存\IO测试"/>
+
+<defaultCache
+	maxEntriesLocalHeap="10000"
+	eternal="false"
+	timeToIdleSeconds="120"
+	timeToLiveSeconds="120"
+	maxEntriesLocalDisk="1000000"
+	diskExpiryThreadIntervalSeconds="120"
+	memoryStoreEvictionPolicy="LRU">
+	<persistence strategy="localTempSwap"/>
+</defaultCache>
+
+<cache name="mycache"
+	maxElementsInMemory="10000"
+	eternal="false"
+	timeToLiveSeconds="100"
+	timeToIdleSeconds="100"
+	memoryStoreEvictionPolicy="LRU"/>
+
+</ehcache>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop
+			http://www.springframework.org/schema/aop/spring-aop.xsd
+			http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans.xsd">
+			
+	<bean id="knight" class="ch1.BraveKnight">
+		<constructor-arg ref="quest"></constructor-arg>
+	</bean>
+	<!-- xml装配 -->
+	<!-- xml方法注入，本质上也是构造方法注入，只不过是使用了bean的形式 -->
+	<bean id="quest" class="ch1.SlayDragonQuest">
+		<constructor-arg value="#{T(System).out}"></constructor-arg>
+	</bean>
+	
+	<bean id="minstrel" class="ch1.Minstrel">
+		<constructor-arg value="#{T(System).out}"></constructor-arg>
+	</bean>
+	
+	<aop:config>
+		<aop:aspect ref="minstrel">
+			<aop:pointcut expression="execution(* *.embarkQuest(..))" id="embark"/>
+			<aop:before method="singBeforeQuest" pointcut-ref="embark"/>
+			<aop:after method="singAfterQuest" pointcut-ref="embark"/>
+		</aop:aspect>
+	</aop:config>
+	
+</beans>
+
+
+
+
+
+
+
+
+

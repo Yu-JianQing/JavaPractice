@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ch9x8.DaoUser">
+	<select id="selectUserByUname" resultType="ch9x8.POUser" parameterType="ch9x8.POUser">
+		select * from user where 1=1
+		<if test="uname !=null and uname !=''">
+			and uname like concat('%',#{uname},'%')
+		</if>
+	</select>
+</mapper>

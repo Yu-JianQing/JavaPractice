@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ch4.UserMap">
+	
+	<resultMap type="ch4.User" id="rs">
+		<id property="id" column="uid"/>
+		<result property="name" column="uname"/>
+		<result property="sex" column="usex"/>
+	</resultMap>
+	
+	<select id="selectAll" resultMap="rs">
+		select * from user
+	</select>
+	
+</mapper>
