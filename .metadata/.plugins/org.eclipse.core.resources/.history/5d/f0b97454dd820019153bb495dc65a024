@@ -1,7 +1,0 @@
-package aboutUtil;
-
-public class aboutRegex {
-	public static void main(String[] args) {
-		
-	}
-}

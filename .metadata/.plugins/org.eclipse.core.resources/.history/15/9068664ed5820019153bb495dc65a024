@@ -1,7 +1,0 @@
-package aboutFIle;
-
-public class DataInOut {
-	public static void main(String[] args) {
-		
-	}
-}

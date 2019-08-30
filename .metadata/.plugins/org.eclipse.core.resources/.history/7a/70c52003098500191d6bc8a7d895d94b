@@ -1,7 +1,0 @@
-package aboutUtil;
-
-public class aboutMathAndRandom {
-	public static void main(String[] args) {
-		
-	}
-}

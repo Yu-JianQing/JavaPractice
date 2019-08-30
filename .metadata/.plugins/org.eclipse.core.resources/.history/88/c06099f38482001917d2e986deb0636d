@@ -1,7 +1,0 @@
-package SErActive_2;
-
-public interface ActiveObject {
-	public abstract void MakingString(int count,char fillchar);
-	public abstract void DisplayString(String string);
-	public abstract void shutdown();
-}

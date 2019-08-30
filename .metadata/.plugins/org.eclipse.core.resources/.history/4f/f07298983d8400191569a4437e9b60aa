@@ -1,7 +1,0 @@
-package aboutUtil;
-
-public class aboutStringBuffer {
-	public static void main(String[] args) {
-		
-	}
-}

@@ -1,9 +1,0 @@
-package YiSTE;
-
-public class User extends Thread{
-	private	 final String name;
-	
-	public void run(){
-		
-	}
-}

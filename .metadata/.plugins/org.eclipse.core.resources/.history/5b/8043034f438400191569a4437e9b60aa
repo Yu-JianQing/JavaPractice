@@ -1,7 +1,0 @@
-package aboutUtil;
-
-public class aboutformat {
-	public static void main(String[] args) {
-		
-	}
-}

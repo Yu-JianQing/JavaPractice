@@ -1,7 +1,0 @@
-package aboutUtil;
-
-public class aboutScanner {
-	public static void main(String[] args) {
-		
-	}
-}

@@ -1,7 +1,0 @@
-package aboutUtil;
-
-public class aboutStringTokenizer {//tokenizer:±ê¼Ç,·ÖÎöÆ÷
-	public static void main(String[] args) {
-		
-	}
-}
