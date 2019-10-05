@@ -1,0 +1,46 @@
+public class Tu2 {
+	private boolean visit[];
+	/*
+	 * 邻接矩阵存储图
+	 */
+	class Graph{
+		char v[];
+		int edge[][];
+		int vCount;
+		int eCount;
+		public Graph(){
+			visit=new boolean[vCount];
+			for(int i=0;i<visit.length;i++)
+				visit[i]=false;
+		}
+	}
+	
+	private LinkedList<Character> queue=new LinkedList<Character>();
+	public void BFS(Graph graph){
+		int index=0;
+		queue.offer(graph.v[index]);
+		System.out.println(graph.v[index]);
+		visit[index]=true;
+		while(!queue.isEmpty()){
+			queue.poll();
+			for(int i=1;i<graph.vCount;i++){
+				if(!visit[i]&&graph.edge[index][i]==1){
+					queue.offer(graph.v[i]);
+					System.out.println(graph.v[i]);
+					visit[i]=true;
+				}
+			}
+		}
+	}
+	
+	public void DFS(Graph graph,int index){
+		if(visit[index])
+			return ;
+		System.out.println(graph.v[index]);
+		visit[index]=true;
+		for(int i=1;i<graph.vCount;i++){
+			if(!visit[i]&&graph.edge[index][i]==1)
+				DFS(graph,i);
+		}
+	}
+}

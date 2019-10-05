@@ -1,0 +1,87 @@
+public class Tu {
+	private Graph graph=new Graph();
+	boolean visit[]=new boolean[graph.vertexCount];
+	
+	//图的邻接表
+	class Graph{
+		int vertexCount;
+		int edgeCount;
+		VertexNode[] vNodes;
+		public Graph(){
+			for(int i=0;i<visit.length;i++)
+				visit[i]=false;
+		}
+	}
+	
+	class VertexNode{
+		char v;
+		PointNode pNext;
+	}
+	class PointNode{
+		char v;
+		PointNode next;
+	}
+	
+	
+	/*深度优先遍历
+	 * 访问起始节点
+	 * 访问当前节点的邻接节点中未访问过的节点
+	 * 直到全部节点访问完毕
+	 */
+	public void DFS(Graph graph,PointNode node){
+		if(isVisit(graph, node))//有错误，这个PointNode和VertexNode类型问题
+			return ;
+		toVisit(graph, node);
+		System.out.println(node.v);
+		
+		PointNode p=node.next;
+		if(!isVisit(graph, p))
+			DFS(graph, p);
+	}
+	
+	/*广度优先遍历
+	 * 访问起始点
+	 * 访问当前节点的所有邻接节点
+	 * 再依次访问邻接节点的所有邻接节点
+	 * 直到全部访问完毕
+	 */
+	public void BFS(Graph graph){
+		LinkedList<PointNode> queue=new LinkedList<PointNode>();
+		
+		for(int i=0;i<graph.vertexCount;i++){
+			if(visit[i])
+				continue ;
+			queue.offer(graph.vNodes[i].pNext);
+			System.out.println(graph.vNodes[i].v);
+			visit[i]=true;
+					
+			while(!queue.isEmpty()){
+				PointNode p=queue.peek();
+				while(p!=null){
+					if(!isVisit(graph, p)){
+						queue.offer(p);
+						toVisit(graph, p);
+						System.out.println(p.v);
+						p=p.next;
+					}
+				}
+			}
+		}
+	}
+	
+	private boolean isVisit(Graph graph,PointNode node){
+		for(int i=0;i<graph.vertexCount;i++){
+			if(graph.vNodes[i].v==node.v)
+				return visit[i];
+		}
+		return false;
+	}
+	
+	private void toVisit(Graph graph,PointNode node){
+		for(int i=0;i<graph.vertexCount;i++){
+			if(graph.vNodes[i].v==node.v)
+				visit[i]=true;
+		}
+	}
+	
+}

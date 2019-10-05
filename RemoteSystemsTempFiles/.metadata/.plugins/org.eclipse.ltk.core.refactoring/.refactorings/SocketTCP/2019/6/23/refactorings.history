@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;EchoProtocol.java&apos; to &apos;SocketTCP/src/SiMulti&apos;&#x0D;&#x0A;- Original project: &apos;SocketTCP&apos;&#x0D;&#x0A;- Destination element: &apos;SocketTCP/src/SiMulti&apos;&#x0D;&#x0A;- Original element: &apos;SiMulti.EchoProtocol.java&apos;" description="Copy compilation unit" destination="/src&lt;SiMulti" element1="/src&lt;SiMulti{EchoProtocol.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1559980973467" units="1" version="1.0"/>
+</session>
