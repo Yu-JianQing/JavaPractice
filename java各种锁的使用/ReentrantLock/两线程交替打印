@@ -1,0 +1,57 @@
+//两线程交替打印
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.ReentrantLock;
+
+public class Main2 {
+	private static int i=1;
+	private static ReentrantLock lock=new ReentrantLock();
+	private static Condition c1=lock.newCondition();
+	private static Condition c2=lock.newCondition();
+	
+	static class Task1 implements Runnable{
+		@Override
+		public void run() {
+			while(true){
+				try {
+					lock.lock();
+					if(i%2==0)
+						c2.await();
+					System.out.println(Thread.currentThread().getName()+"  "+i);
+					i++;
+					c1.signalAll();
+				} catch (Exception e) {
+					System.out.println(e);
+				}finally{
+					lock.unlock();
+				}
+			}
+		}
+	}
+	
+	static class Task2 implements Runnable{
+		@Override
+		public void run() {
+			while(true){
+				try {
+					lock.lock();
+					if(i%2==1)
+						c1.await();
+					System.out.println(Thread.currentThread().getName()+"  "+i);
+					i++;
+					c2.signalAll();
+				} catch (Exception e) {
+					System.out.println(e);
+				}finally{
+					lock.unlock();
+				}
+			}
+		}
+	}
+	
+    public static void main(String[] args) {
+       Thread thread1=new Thread(new Task1());
+       Thread thread2=new Thread(new Task2());
+       thread1.start();
+       thread2.start();
+    }
+}

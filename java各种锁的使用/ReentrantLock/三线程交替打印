@@ -1,0 +1,83 @@
+//三线程交替打印
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.ReentrantLock;
+
+public class Main {
+	private static int i=1;
+	private static boolean flag=true;
+	private static ReentrantLock lock=new ReentrantLock();
+	private static Condition ji=lock.newCondition();
+	private static Condition ou=lock.newCondition();
+	private static Condition zero=lock.newCondition();
+	
+	static class Task0 implements Runnable{
+		@Override
+		public void run() {
+			while(true){
+				try {
+					lock.lock();
+					if(!flag)
+						zero.await();
+					System.out.println(Thread.currentThread().getName()+"  "+0);
+					flag=false;
+					ji.signalAll();
+				} catch (Exception e) {
+					System.out.println(e);
+				}finally{
+					lock.unlock();
+				}
+			}
+		}
+	}
+	
+	static class Task1 implements Runnable{
+		@Override
+		public void run() {
+			while(true){
+				try {
+					lock.lock();
+					if(flag||i%2==0)
+						ji.await();
+					System.out.println(Thread.currentThread().getName()+"  "+i);
+					i++;
+					ou.signalAll();
+				} catch (Exception e) {
+					System.out.println(e);
+				}finally{
+					lock.unlock();
+				}
+			}
+		}
+	}
+	
+	static class Task2 implements Runnable{
+		@Override
+		public void run() {
+			while(true){
+				try {
+					lock.lock();
+					if(flag||i%2==1)
+						ou.await();
+					System.out.println(Thread.currentThread().getName()+"  "+i);
+					i++;
+					flag=true;
+					zero.signalAll();
+				} catch (Exception e) {
+					System.out.println(e);
+				}finally{
+					lock.unlock();
+				}
+			}
+		}
+	}
+	
+    public static void main(String[] args) {
+       Thread thread0=new Thread(new Task0());
+       Thread thread1=new Thread(new Task1());
+       Thread thread2=new Thread(new Task2());
+       thread0.start();
+       thread1.start();
+       thread2.start();
+    }
+}
+
