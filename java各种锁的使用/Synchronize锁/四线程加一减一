@@ -1,0 +1,47 @@
+//设计四个线程,其中两个线程每次对变量i加1,另外两个线程每次对i减1.
+public class B {
+	private static int i=0;
+	private static Object object=new Object();
+	
+	private static void addOne(){
+		synchronized (object) {
+			i++;
+			System.out.println(Thread.currentThread().getName()+"  "+i);
+		}
+	}
+	
+	private static void subOne(){
+		synchronized (object) {
+			i--;
+			System.out.println(Thread.currentThread().getName()+"  "+i);
+		}
+	}
+	
+	public static void main(String[] args) {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				addOne();
+			}
+		}).start();
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				subOne();
+			}
+		}).start();
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				subOne();
+			}
+		}).start();
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				addOne();
+			}
+		}).start();
+			
+	}
+}

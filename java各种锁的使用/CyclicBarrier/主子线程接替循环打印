@@ -1,0 +1,41 @@
+//主子线程接替循环打印
+import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.Semaphore;
+
+//编写程序实现,子线程循环3次,接着主线程循环5次,接着再子线程循环3次,主线程循环5次,如此反复,循环3次.
+
+public class Solution {
+	private static CyclicBarrier barrier=new CyclicBarrier(2);
+	private static Semaphore sp=new Semaphore(0);
+	
+	static class TRun implements Runnable{
+		@Override
+		public void run() {
+			try {
+				for(int i=0;i<3;i++){
+					barrier.await();
+					for(int j=0;j<3;j++)
+						System.out.println("sub "+j);
+					sp.release();
+				}
+			} catch (Exception e) {}
+		}
+		
+	}
+	
+	public static void main(String[] args) {
+		TRun tRun=new A.TRun();
+		Thread thread=new Thread(tRun);
+		thread.start();
+		try {
+			for(int i=0;i<3;i++){
+				barrier.await();
+				sp.acquire();
+				for(int j=0;j<5;j++)
+					System.out.println("main "+j);
+			}
+		} catch (Exception e) {}
+		
+	}
+	
+}

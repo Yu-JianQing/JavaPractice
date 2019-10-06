@@ -1,0 +1,44 @@
+//三任务五阶段
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
+//线程池,完成3个任务，每个任务分为5个阶段
+public class Solution {
+	private static CountDownLatch cdl=new CountDownLatch(3);
+	private static CyclicBarrier barrier=new CyclicBarrier(3);
+	private static AtomicInteger i=new AtomicInteger(0);
+	
+	static class Task implements Runnable{
+		@Override
+		public void run() {
+			try {
+				System.out.println(Thread.currentThread().getName()+"execute task begin");
+				barrier.await();
+				for(int k=0;k<5;k++){
+					System.out.println("task "+k+" phase");
+				}
+			} catch (Exception e) {
+			}finally{
+				System.out.println(Thread.currentThread().getName()+"execute task end");
+				cdl.countDown();
+			}
+		}
+		
+	}
+	
+	public static void main(String[] args) {
+		ExecutorService service=Executors.newFixedThreadPool(5);
+		try {
+			System.out.println("begin");
+			for(int k=0;k<3;k++)
+				service.execute(new Task());
+			cdl.await();
+		} catch (Exception e) {
+		}finally{
+			service.shutdown();
+			System.out.println("end");
+		}
+	}
+}

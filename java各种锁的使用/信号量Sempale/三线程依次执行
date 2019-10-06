@@ -1,0 +1,51 @@
+//三线程依次执行
+import java.util.concurrent.Semaphore;
+
+//现在有T1、T2、T3三个线程，你怎样保证T2在T1执行完后执行，T3在T2执行完后执行？
+public class Solution {
+	private static Semaphore sp1=new Semaphore(0);
+	private static Semaphore sp2=new Semaphore(0);
+	
+	static class T1Run implements Runnable{
+		@Override
+		public void run() {
+			System.out.println("t1");
+			sp1.release();
+		}
+		
+	}
+	
+	static class T2Run implements Runnable{
+		@Override
+		public void run() {
+			try {
+				sp1.acquire();
+				System.out.println("t2");
+				sp2.release();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
+	static class T3Run implements Runnable{
+		@Override
+		public void run() {
+			try {
+				sp2.acquire();
+				System.out.println("t3");
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
+	public static void main(String[] args) {
+		new Thread(new T3Run()).start();
+		new Thread(new T2Run()).start();
+		new Thread(new T1Run()).start();
+	}
+	
+}

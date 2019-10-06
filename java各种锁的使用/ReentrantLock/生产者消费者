@@ -1,0 +1,55 @@
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
+public class PAndC {
+	private final int room[]=new int[10];
+	private int count=0;
+	private int index=0;
+	private final Lock lock=new ReentrantLock();
+	
+	private final Condition empty=lock.newCondition();
+	private final Condition full=lock.newCondition();
+	
+	public void put(int num){
+		lock.lock();
+		try {
+			if(count==room.length){
+				System.out.println("room is full");
+				full.await();
+			}
+			System.out.println("pro a num :"+ num);
+			count++;
+			if(index<0)
+				index=0;
+			room[index]=num;
+			index=(index+1)%room.length;
+			empty.signalAll();
+		} catch (Exception e) {
+			System.out.println(e);
+		}finally{
+			lock.unlock();
+		}
+	}
+
+	public int take(){
+		lock.lock();
+		try {
+			if(count<=0){
+				System.out.println("room is empty");
+				empty.await();
+			}
+			count--;
+			index=count;
+			int rs=room[index--];
+			System.out.println("cus a num :"+ rs);
+			full.signalAll();
+			return rs;
+		} catch (Exception e) {
+			System.out.println(e);
+		}finally{
+			lock.unlock();
+		}
+		return -1;
+	}
+}

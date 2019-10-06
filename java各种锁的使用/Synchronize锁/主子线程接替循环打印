@@ -1,0 +1,45 @@
+//编写程序实现,子线程循环3次,接着主线程循环5次,接着再子线程循环3次,主线程循环5次,如此反复,循环3次.
+
+public class Solution {
+	private static Object object=new Object();
+	private static boolean flag=true;
+	
+	static class TRun implements Runnable{
+		@Override
+		public void run() {
+			try {
+				for(int i=0;i<3;i++){
+					synchronized (object) {
+						while(!flag)
+							object.wait();
+						for(int j=0;j<3;j++)
+							System.out.println("sub "+j);
+						flag=false;
+						object.notifyAll();
+					}
+				}
+			} catch (Exception e) {}
+		}
+		
+	}
+	
+	public static void main(String[] args) {
+		TRun tRun=new A.TRun();
+		Thread thread=new Thread(tRun);
+		thread.start();
+		try {
+			for(int i=0;i<3;i++){
+				synchronized (object) {
+					while(flag)
+						object.wait();
+					for(int j=0;j<5;j++)
+						System.out.println("main "+j);
+					flag=true;
+					object.notifyAll();
+				}
+			}
+		} catch (Exception e) {}
+		
+	}
+	
+}

@@ -1,0 +1,35 @@
+//贮物柜
+public class Solution {
+	static class MyLog{
+		public void print(){
+			System.out.println(Thread.currentThread().getName()+" log print");
+		}
+	}
+	
+	static class Logs{
+		ThreadLocal<MyLog> logs=new ThreadLocal<H.MyLog>();
+		public void print(){
+			MyLog log=logs.get();
+			if(log==null){
+				log=new MyLog();
+				logs.set(log);
+			}
+			log.print();
+		}
+	}
+	
+	static class MyRun implements Runnable{
+		@Override
+		public void run() {
+			Logs log=new Logs();
+			log.print();
+		}
+	}
+	
+	public static void main(String[] args) {
+		for(int i=0;i<3;i++){
+			new Thread(new MyRun()).start();
+		}
+	}
+	
+}

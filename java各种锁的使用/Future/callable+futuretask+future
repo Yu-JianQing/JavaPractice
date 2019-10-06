@@ -1,0 +1,32 @@
+//callable+futuretask+future
+import java.util.concurrent.Callable;
+import java.util.concurrent.Future;
+import java.util.concurrent.FutureTask;
+
+//提货单callable+futuretask+future+thread
+public class Solution {
+	private static int i=0;
+	
+	static class makeRun implements Callable<String>{
+		@Override
+		public String call() throws Exception {
+			try {
+				System.out.println("making cake---");
+				Thread.sleep(500);
+				i++;
+				return "cake"+i;
+			} catch (Exception e) {}
+			return null;
+		}
+	}
+	
+	public static void main(String[] args) {
+		try {
+			FutureTask<String> task=new FutureTask<String>(new makeRun());
+			Thread host=new Thread(task);
+			host.start();
+			System.out.println(task.get());
+		} catch (Exception e) {}
+	}
+	
+}

@@ -1,0 +1,54 @@
+import java.util.concurrent.LinkedBlockingQueue;
+
+//自己编写代码,实现生产者-消费者模型功能.内容自由发挥,只需要表达思想.
+public class Solution {
+	private static LinkedBlockingQueue<String> queue=new LinkedBlockingQueue<String>();
+	private static int i=0;
+	
+	static class proRun implements Runnable{
+		@Override
+		public void run() {
+			while(true){
+				synchronized (this) {
+					i++;
+					System.out.println("produce a product  "+i);
+					queue.offer("a product  "+i);
+				}
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+	}
+	
+	static class cusRun implements Runnable{
+		@Override
+		public void run() {
+			while(true){
+				synchronized (this) {
+					String rs=queue.poll();
+					System.out.println(rs);
+				}
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
+	public static void main(String[] args) {
+		
+		Thread pro=new Thread(new proRun());
+		Thread cus=new Thread(new cusRun());
+		pro.start();
+		cus.start();
+		
+	}
+}

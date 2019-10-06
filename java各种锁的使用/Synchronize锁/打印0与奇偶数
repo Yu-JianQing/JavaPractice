@@ -1,0 +1,56 @@
+//打印0与奇偶数
+import java.util.function.IntConsumer;
+
+class ZeroEvenOdd {
+    private int n;
+    private volatile boolean flag=true;
+    private volatile boolean zero=true;
+    
+    
+    public ZeroEvenOdd(int n) {
+        this.n = n;
+    }
+
+    // printNumber.accept(x) outputs "x", where x is an integer.
+    public void zero(IntConsumer printNumber) throws InterruptedException {
+        for(int i=1;i<=n;i++){
+        	synchronized (this) {
+        		while(zero!=true)
+        			this.wait();
+        		printNumber.accept(0);
+        		zero=false;
+        		this.notifyAll();
+			}
+        }
+    }
+
+    public void even(IntConsumer printNumber) throws InterruptedException {
+    	for(int i=1;i<=n;i++){
+    		if(i%2==0){
+    			synchronized (this) {
+    				while(zero==true||flag!=false)
+    					this.wait();
+    				printNumber.accept(i);
+					flag=true;
+					zero=true;
+					this.notifyAll();
+				}
+    		}
+    	}
+    }
+
+    public void odd(IntConsumer printNumber) throws InterruptedException {
+    	for(int i=1;i<=n;i++){
+    		if(i%2!=0){
+    			synchronized (this) {
+    				while(zero==true||flag!=true)
+    					this.wait();
+    				printNumber.accept(i);
+					flag=false;
+					zero=true;
+					this.notifyAll();
+				}
+    		}
+    	}
+    }
+}

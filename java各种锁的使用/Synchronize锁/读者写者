@@ -1,0 +1,49 @@
+//读者写者
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock.ReadLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock.WriteLock;
+
+public class Solution {
+	private static ReentrantReadWriteLock rwLock=new ReentrantReadWriteLock();
+	private static ReadLock rLock=rwLock.readLock();
+	private static WriteLock wLock=rwLock.writeLock();
+	
+	static class rRun implements Runnable{
+		@Override
+		public void run() {
+			try {
+				while(true){
+					rLock.lock();
+					System.out.println(Thread.currentThread().getName()+"reading");
+					Thread.sleep(200);
+					System.out.println(Thread.currentThread().getName()+"read done");
+					rLock.unlock();
+				}
+			} catch (Exception e) {}
+		}
+		
+	}
+	
+	static class wRun implements Runnable{
+		@Override
+		public void run() {
+			try {
+				while(true){
+					wLock.lock();
+					System.out.println(Thread.currentThread().getName()+"writing");
+					Thread.sleep(100);
+					System.out.println(Thread.currentThread().getName()+"write done");
+					wLock.unlock();
+				}
+			} catch (Exception e) {}
+		}
+		
+	}
+	
+	public static void main(String[] args) {
+		new Thread(new rRun()).start();//0
+		new Thread(new rRun()).start();//1
+		new Thread(new wRun()).start();//2
+		new Thread(new wRun()).start();//3
+	}
+}

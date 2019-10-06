@@ -1,0 +1,49 @@
+//现在有T1、T2、T3三个线程，你怎样保证T2在T1执行完后执行，T3在T2执行完后执行？
+public class Solution {
+	private static volatile int flag=1;
+	
+	static class T1Run implements Runnable{
+		@Override
+		public void run() {
+			while(flag!=1) ;
+			System.out.println("t1");
+			flag=2;
+		}
+		
+	}
+	
+	static class T2Run implements Runnable{
+		@Override
+		public void run() {
+			try {
+				while(flag!=2) ;
+				System.out.println("t2");
+				flag=3;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
+	static class T3Run implements Runnable{
+		@Override
+		public void run() {
+			try {
+				while(flag!=3) ;
+				System.out.println("t3");
+				flag=1;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
+	public static void main(String[] args) {
+		new Thread(new T3Run()).start();
+		new Thread(new T2Run()).start();
+		new Thread(new T1Run()).start();
+	}
+	
+}

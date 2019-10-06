@@ -1,0 +1,31 @@
+//H2O生成
+import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.Semaphore;
+
+class H2O {
+	CyclicBarrier barrier=new CyclicBarrier(3);
+	Semaphore sp1=new Semaphore(2);
+	Semaphore sp2=new Semaphore(1);
+	
+    public H2O() {}
+
+    public void hydrogen(Runnable releaseHydrogen) throws InterruptedException {
+		try {
+			sp1.acquire();
+			barrier.await();
+		    // releaseHydrogen.run() outputs "H". Do not change or remove this line.
+		    releaseHydrogen.run();
+		    sp1.release();
+		} catch (Exception e) {}
+    }
+
+    public void oxygen(Runnable releaseOxygen) throws InterruptedException {
+        try {
+        	sp2.acquire();
+        	barrier.await();
+        	// releaseOxygen.run() outputs "H". Do not change or remove this line.
+    		releaseOxygen.run();
+    		sp2.release();
+		} catch (Exception e) {}
+    }
+}

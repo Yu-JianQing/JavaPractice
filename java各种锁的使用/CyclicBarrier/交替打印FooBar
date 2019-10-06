@@ -1,0 +1,36 @@
+//交替打印FooBar
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.CyclicBarrier;
+
+class FooBar {
+    private int n;
+    private CyclicBarrier barrier=new CyclicBarrier(2);
+    private CountDownLatch cdl=new CountDownLatch(1);
+
+    public FooBar(int n) {
+        this.n = n;
+    }
+
+    public void foo(Runnable printFoo) throws InterruptedException{
+        try {
+        	for (int i = 0; i < n; i++) {
+            	// printFoo.run() outputs "foo". Do not change or remove this line.
+            	printFoo.run();
+            	cdl.countDown();
+            	barrier.await();
+            }
+		} catch (Exception e) {}
+    }
+
+    public void bar(Runnable printBar) throws InterruptedException {
+        try {
+        	for (int i = 0; i < n; i++) {
+                cdl.await();
+                // printBar.run() outputs "bar". Do not change or remove this line.
+            	printBar.run();
+            	cdl=new CountDownLatch(1);
+            	barrier.await();
+            }
+		} catch (Exception e) {}
+    }
+}
