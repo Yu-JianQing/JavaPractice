@@ -1,0 +1,36 @@
+和为S的连续正数序列
+import java.util.ArrayList;
+public class Solution {
+    private ArrayList<ArrayList<Integer>> lists=new ArrayList<ArrayList<Integer>>();
+    public ArrayList<ArrayList<Integer>> FindContinuousSequence(int sum) {
+        if(sum<0)
+           return lists;
+        int start=1;
+        int end=2;
+        while(start<end){
+            if(getSum(start,end)==sum){
+                ListAdd(start,end);
+                start++;//记得往后移
+            }
+            else if(getSum(start,end)>sum)
+                start++;
+            else
+                end++;
+        }
+        return lists;
+    }
+    private int getSum(int start,int end){
+        int sum=0;
+        while(start<=end){
+            sum=sum+start;
+            start++;
+        }
+        return sum;
+    }
+    private void ListAdd(int start,int end){
+        ArrayList<Integer> list=new ArrayList<Integer>();
+        for(int i=start;i<=end;i++)
+            list.add(i);
+        lists.add(list);
+    }
+}

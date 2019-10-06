@@ -1,0 +1,50 @@
+归并排序
+public class MergeSort {
+	
+	private int[] merge(int num[],int start,int end){
+		int mid=(start+end)/2;
+		int Lstart=start;
+		int Rstart=mid+1;
+		int p[]=new int[end-start+1];
+		int pindex=0;
+		while(Lstart<=mid&&Rstart<=end){
+			if(num[Lstart]>=num[Rstart])
+				p[pindex++]=num[Rstart++];
+			else 
+				p[pindex++]=num[Lstart++];
+		}
+		while(Lstart<=mid)
+			p[pindex++]=num[Lstart++];
+		while(Rstart<=end)
+			p[pindex++]=num[Rstart++];
+		
+		for (int i = 0; i < p.length; i++) 
+			num[start+i]=p[i];
+		//必须要加入这一句，让操作始终是操作在num数组
+		
+		return num;
+	}
+	
+	public int[] mergeSort(int num[],int start,int end){
+		if(num==null||start>=end)
+			return num;
+		int mid=(start+end)/2;
+		mergeSort(num,start,mid);
+		mergeSort(num, mid+1, end);
+		return merge(num, start, end);
+	}
+	
+	public int[] mergeSort2(int num[],int start,int end){
+		int Lstart=start,Lend=0;
+		int Rstart=0,Rend=0;
+		for(int i=1;i<=end;i=2*i){
+			for(;Lstart<=end;Lstart=Rend+1){
+				Lend=Lstart+i-1;
+				Rstart=Lend+1;
+				Rend=Rstart+i-1;
+				merge(num, Lstart, Rend);
+			}
+		}
+		return num;
+	}
+}

@@ -1,0 +1,29 @@
+写一个函数，当一颗白棋落下的时候，判断白方是否五连珠，棋盘是13*13大小，用数组表示，0表示空，1表示白棋，2表示黑棋
+public class Main {
+	public boolean isWin(int num[][]){
+		int X[]={1,0,1,1,};//表示x轴上的变化，默认向右，向下，向右上，向右下为正。负=正*-1
+		int Y[]={0,1,1,-1};//表示y轴上的变化。x[i]和y[i]是一组，表示一组方向，共四个方向。
+		
+		for(int i=0;i<num.length;i++){
+			for(int j=0;j<num[i].length;j++){
+				if(num[i][j]==0)
+					continue ;
+				int falg=num[i][j]==1?1:2;
+				
+				for(int k=0;k<4;k++){//朝四个方向判断
+					int count1=0;//统计正向相同的个数
+					int count2=0;//统计负向相同的个数
+					for(int x=i+X[k],y=j+Y[k];(x<i+4&&y<j+4)&&(num[x][y]==falg);x=x+X[k],y=y+Y[k]){
+						count1++;
+					}
+					for(int x=i-X[k],y=j-Y[k];(x>i-4&&y>j-4)&&(num[x][y]==falg);x=x-X[k],y=y-Y[k]){
+						count2++;
+					}
+					if(count1+count2>=4)
+						return true;
+				}
+			}
+		}
+		return false;
+	}
+}

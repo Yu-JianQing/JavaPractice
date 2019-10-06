@@ -1,0 +1,21 @@
+第一次只出现一次的字符
+import java.util.HashMap;
+public class Solution {
+    public int FirstNotRepeatingChar(String str) {
+        if(str==null||str.length()<=0||str.length()>=10000)
+            return -1;
+        HashMap<Character,Integer> map=new HashMap<Character,Integer>();
+        char cs[]=str.toCharArray();
+        for(int i=0;i<cs.length;i++){
+            if(map.containsKey(cs[i]))
+                map.put(cs[i],map.get(cs[i])+1);
+            else
+                map.put(cs[i],1);
+        }
+        for(int i=0;i<cs.length;i++){
+            if(map.get(cs[i])==1)
+                return i;
+        }
+        return 0;
+    }
+}

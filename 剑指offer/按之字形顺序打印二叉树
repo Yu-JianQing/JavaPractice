@@ -1,0 +1,55 @@
+按之字形顺序打印二叉树
+import java.util.ArrayList;
+import java.util.Stack;
+/*
+public class TreeNode {
+    int val = 0;
+    TreeNode left = null;
+    TreeNode right = null;
+    public TreeNode(int val) {
+        this.val = val;
+    }
+}
+*/
+public class Solution {
+    private Stack<TreeNode> stack1=new Stack<TreeNode>();
+    private Stack<TreeNode> stack2=new Stack<TreeNode>();
+    private ArrayList<ArrayList<Integer>> lists=new ArrayList<ArrayList<Integer>>();
+    private ArrayList<Integer> list=new ArrayList<Integer>();
+    
+    public ArrayList<ArrayList<Integer>> Print(TreeNode pRoot) {
+        if(pRoot==null)
+            return lists;
+        stack1.push(pRoot);
+        int ceng=1;
+        while(!stack1.isEmpty()||!stack2.isEmpty()){
+            if(ceng%2!=0){
+                TreeNode node=stack1.pop();
+                list.add(node.val);
+                if(node.left!=null)
+                    stack2.push(node.left);
+                if(node.right!=null)
+                    stack2.push(node.right);
+                if(stack1.isEmpty()){
+                    ceng++;
+                    lists.add(new ArrayList(list));
+                    list.clear();
+                }
+            }else{
+                TreeNode node=stack2.pop();
+                list.add(node.val);
+                if(node.right!=null)
+                    stack1.push(node.right);
+                if(node.left!=null)
+                    stack1.push(node.left);
+                if(stack2.isEmpty()){
+                    ceng++;
+                    lists.add(new ArrayList(list));
+                    list.clear();
+                }
+            }
+        }
+        return lists;
+    }
+
+}

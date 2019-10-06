@@ -1,0 +1,29 @@
+有数组a[]={12,13,14,2,4,5,7,9,3,6},中间有连续递增的子数组，如{12,13,14}，{2,4,5,7,9},{3,6}。现在要求把原来数组中每个递增部分组成一个新的 数组m[][],
+public class Main {
+	public int[][] reset(int num[]){
+		int m[][]=null;
+		int start=0;
+		int count=0;
+		for(int i=0;i<num.length-1;i++){
+			if(num[i]>num[i+1])
+				count++;
+		}
+		m=new int[count+1][];//两个点会把数组分成3段
+		int index=0;
+		for(int i=0;i<num.length-1;i++){
+			if(num[i]>num[i+1]){
+				m[index]=new int[i+1-start];
+				int x=start;
+				for(int j=0;j<i+1-start;j++)
+					m[index][j]=num[x++];
+				start=i+1;
+				index++;
+			}
+		}
+		m[index]=new int[num.length-start];
+		int x=start;
+		for(int i=0;i<num.length-start;i++)//最后一段要加上
+			m[index][i]=num[x++];
+		return m;
+	}
+}

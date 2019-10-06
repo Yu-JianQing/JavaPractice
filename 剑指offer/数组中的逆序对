@@ -1,0 +1,43 @@
+数组中的逆序对
+public class Solution {
+    private int count=0;
+    public int InversePairs(int [] array) {
+        if(array==null||array.length==0)
+            return 0;
+        mergesort(array,0,array.length-1);
+        return count;
+    }
+    private int[] mergesort(int array[],int start,int end){
+        if(array==null||start>=end)
+            return array;
+        int mid=(start+end)/2;
+        mergesort(array,start,mid);
+        mergesort(array,mid+1,end);
+        return merge(array,start,end);
+    }
+    private int[] merge(int array[],int start,int end){
+        int num[]=new int[end-start+1];
+        int index=0;
+        int mid=(start+end)/2;
+        int Lstart=start;
+        int Rstart=mid+1;
+        while(Lstart<=mid&&Rstart<=end){
+            if(array[Lstart]<=array[Rstart])
+                num[index++]=array[Lstart++];
+            else{
+                num[index++]=array[Rstart++];
+                count=(count+mid-Lstart+1)%1000000007;
+               //这里才是计算逆序数，其余都是归并排序
+            }
+        }
+        while(Lstart<=mid){
+            num[index++]=array[Lstart++];
+        }
+        while(Rstart<=end){
+            num[index++]=array[Rstart++];
+        }
+        for(int i=0;i<num.length;i++)
+            array[start+i]=num[i];
+        return array;
+    }
+}

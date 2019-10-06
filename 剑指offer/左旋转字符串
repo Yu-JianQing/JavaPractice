@@ -1,0 +1,17 @@
+左旋转字符串
+import java.util.Arrays;
+public class Solution {
+    public String LeftRotateString(String str,int n) {
+        if(str==null||str.length()==0||n<0)
+            return "";
+        char cs[]=str.toCharArray();
+        char mycs[]=new char[cs.length];
+        char sts[]=Arrays.copyOfRange(cs,n,cs.length);
+        for(int i=0;i<sts.length;i++)
+            mycs[i]=sts[i];
+        int index=mycs.length-1;
+        for(int i=n-1;i>=0;i--)
+            mycs[index--]=cs[i];
+        return new String(mycs);
+    }
+}

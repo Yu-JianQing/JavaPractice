@@ -1,0 +1,15 @@
+单例模式
+public class SingleEx {
+	private static SingleEx singleEx;	
+	private SingleEx(){}
+	
+	public static SingleEx getSingleEx(){
+		if(singleEx==null){
+			synchronized (SingleEx.class) {
+				if(singleEx==null)
+					singleEx=new SingleEx();
+			}
+		}
+		return singleEx;
+	}
+}

@@ -1,0 +1,52 @@
+快速排序
+public class QuickSort {
+	private Stack<Integer> stack=new Stack<Integer>();
+	
+	private int findMid(int num[],int start,int end){
+		int low=start;
+		int high=end;
+		int elem=num[low];
+		while(low<high){
+			while(low<high&&num[high]>=elem)
+				high--;
+			if(low<high)
+				num[low++]=num[high];
+			while(low<high&&num[low]<=elem)
+				low++;
+			if(low<high)
+				num[high--]=num[low];
+		}
+		num[low]=elem;
+		return low;
+	}
+	
+	public int[] quickSort(int num[],int start,int end){
+		if(start>=end)
+			return num;
+		int mid=findMid(num, start, end);
+		quickSort(num, start, mid-1);//这里mid位置的值已确定
+		quickSort(num, mid+1, end);
+		return num;
+	}
+	
+	public int[] quickSort2(int num[],int start,int end){
+		if(start>=end)
+			return num;
+		stack.push(end);
+		stack.push(start);
+		while(!stack.isEmpty()){
+			int low=stack.pop();
+			int high=stack.pop();
+			int mid=findMid(num, low, high);
+			if(high>mid){
+				stack.push(high);
+				stack.push(mid+1);
+			}
+			if(low<mid){
+				stack.push(mid-1);
+				stack.push(low);
+			}
+		}
+		return num;
+	}
+}

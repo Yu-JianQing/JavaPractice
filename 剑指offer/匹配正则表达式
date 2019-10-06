@@ -1,0 +1,26 @@
+匹配正则表达式
+public class Solution {
+    public boolean match(char[] str, char[] pattern)
+    {
+        if(str==null||pattern==null)
+            return false;
+        return matchCore(str,0,pattern,0);
+    }
+    private boolean matchCore(char str[],int sIndex,char pattern[],int pIndex){
+        if(sIndex==str.length&&pIndex==pattern.length)
+            return true;
+        if(sIndex!=str.length&&pIndex==pattern.length)
+            return false;
+        if(pIndex+1<pattern.length&&pattern[pIndex+1]=='*'){
+            if(sIndex!=str.length&&(str[sIndex]==pattern[pIndex]||pattern[pIndex]=='.'))
+                return matchCore(str,sIndex,pattern,pIndex+2)||
+                        matchCore(str,sIndex+1,pattern,pIndex+2)||
+                        matchCore(str,sIndex+1,pattern,pIndex);
+            else
+               return matchCore(str,sIndex,pattern,pIndex+2);
+        }
+        if(sIndex!=str.length&&(str[sIndex]==pattern[pIndex]||pattern[pIndex]=='.'))
+            return matchCore(str,sIndex+1,pattern,pIndex+1);
+        return false;
+    }
+}

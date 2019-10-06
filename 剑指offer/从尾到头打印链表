@@ -1,0 +1,48 @@
+/**从尾到头打印链表
+*    public class ListNode {
+*        int val;
+*        ListNode next = null;
+*
+*        ListNode(int val) {
+*            this.val = val;
+*        }
+*    }
+*
+*/
+import java.util.ArrayList;
+public class Solution {
+    public ArrayList<Integer> printListFromTailToHead(ListNode listNode) {
+       /**
+*    public class ListNode {
+*        int val;
+*        ListNode next = null;
+*
+*        ListNode(int val) {
+*            this.val = val;
+*        }
+*    }
+*
+*/
+从尾到头打印链表
+import java.util.ArrayList;
+import java.util.Stack;
+public class Solution {
+    public ArrayList<Integer> printListFromTailToHead(ListNode listNode) {
+        ArrayList<Integer> list=new ArrayList<Integer>();
+        if(listNode==null)
+            return list;
+        ListNode node=listNode;
+        Stack<ListNode> stack=new Stack<ListNode>();
+        while(node!=null){
+            stack.push(node);
+            node=node.next;
+        }
+        while(!stack.isEmpty()){
+            ListNode p=stack.pop();
+            int val=p.val;
+            list.add(val);
+        }
+        return list;
+    }
+
+}}

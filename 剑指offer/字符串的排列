@@ -1,0 +1,34 @@
+字符串的排列
+import java.util.ArrayList;
+import java.util.Collections;
+public class Solution {
+    private ArrayList<String> list=new ArrayList<String>();
+    public ArrayList<String> Permutation(String str) {
+        if(str==null||str.length()==0)
+            return list;
+        char cs[]=str.toCharArray();
+        list=Find(cs,0);
+        Collections.sort(list);
+        return list;
+    }
+    private ArrayList<String> Find(char cs[],int start){
+        if(start>=cs.length){
+            String str=new String(cs);
+            list.add(str);
+        }
+        for(int i=start;i<cs.length;i++){
+            if(start==i||cs[start]!=cs[i]){//防止两个n交换的元素重复
+                swap(cs,start,i);
+                Find(cs,start+1);
+                swap(cs,start,i);//复位
+            }
+        }
+        return list;
+    }
+    
+    private void swap(char cs[],int i,int j){
+        char c=cs[i];
+        cs[i]=cs[j];
+        cs[j]=c;
+    }
+}

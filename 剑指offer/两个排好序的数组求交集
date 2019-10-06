@@ -1,0 +1,26 @@
+两个排好序的数组求交集。每个数组中的数字唯一。
+import java.util.ArrayList;
+public class Main {
+	public int[] getIn(int a[],int b[]){
+		ArrayList<Integer> list=new ArrayList<Integer>();
+		int c[]=null;
+		
+		int indexA=0;
+		int indexB=0;
+		while(indexA<a.length&&indexB<b.length){
+			if(a[indexA]==b[indexB]){
+				list.add(a[indexA]);
+				indexA++;
+				indexB++;
+			}else if(a[indexA]>b[indexB])
+				indexB++;
+			else 
+				indexA++;
+		}
+		
+		c=new int[list.size()];
+		for(int i=0;i<list.size();i++)
+			c[i]=list.get(i);
+		return c;
+	}
+}

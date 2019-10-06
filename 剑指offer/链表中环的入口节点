@@ -1,0 +1,55 @@
+/*链表中环的入口节点
+ public class ListNode {
+    int val;
+    ListNode next = null;
+
+    ListNode(int val) {
+        this.val = val;
+    }
+}
+*/
+public class Solution {
+
+    public ListNode EntryNodeOfLoop(ListNode pHead)
+    {
+        ListNode reaptNode=findReaptNode(pHead);
+        if(pHead==null||reaptNode==null)
+            return null;
+        ListNode pre=pHead;
+        ListNode after=pHead;
+        int count=1;
+        while(pre!=reaptNode){
+            pre=pre.next;
+            count++;
+        }
+        pre=pHead;
+        for(int i=1;i<=count;i++)
+            pre=pre.next;
+        while(pre!=after){
+            pre=pre.next;
+            after=after.next;
+        }
+        return after;
+    }
+    private ListNode findReaptNode(ListNode pHead){
+        if(pHead==null)
+            return null;
+        ListNode slow=pHead;
+        ListNode fast=pHead;
+        if(slow.next!=null)
+            fast=slow.next;
+        else
+            return null;
+        while(slow!=null&&fast!=null){
+            if(slow==fast)
+                return fast;
+            if(slow.next!=null)
+                slow=slow.next;
+            if(fast.next!=null)
+                fast=fast.next;
+            if(fast.next!=null)
+                fast=fast.next;
+        }
+        return null;
+    }
+}

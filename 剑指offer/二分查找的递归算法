@@ -1,0 +1,13 @@
+实现二分查找的递归算法
+public class Main {
+	public boolean isContain(int num[],int k,int start,int end){
+		if(num==null||start>end)
+			return false;
+		int mid=(start+end)/2;
+		if(num[mid]==k)
+			return true;
+		boolean flag1=isContain(num, k, start, mid-1);
+		boolean flag2=isContain(num, k, mid+1, end);
+		return flag1||flag2;
+	}
+}

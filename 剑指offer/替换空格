@@ -1,0 +1,24 @@
+替换空格
+public class Solution {
+    public String replaceSpace(StringBuffer str) {
+    	int n=0;
+        for(int i=0;i<str.length();i++){
+            if(str.charAt(i)==' ')
+                n++;
+        }
+        int old=str.length()-1;
+        str.setLength(n*2+str.length());
+        int real=str.length()-1;
+        
+        for(;old>=0&&old<real;old--){
+            if(str.charAt(old)==' '){
+                str.setCharAt(real--,'0');
+                str.setCharAt(real--,'2');
+                str.setCharAt(real--,'%');
+            }else{
+                str.setCharAt(real--,str.charAt(old));
+            }
+        }
+        return str.toString();
+    }
+}

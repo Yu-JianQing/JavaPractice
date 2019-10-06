@@ -1,0 +1,41 @@
+机器人的运动范围
+public class Solution {
+    private int count=0;
+    public int movingCount(int threshold, int rows, int cols)
+    {
+        if(rows<=0&&cols<=0)
+            return 0;
+        boolean visit[][]=new boolean[rows][cols];
+        for(int i=0;i<visit.length;i++)
+            for(int j=0;j<visit[i].length;j++)
+                visit[i][j]=false;
+        next(rows,cols,0,0,visit,threshold);
+        return count;
+    }
+    
+    private boolean next(int rows,int cols,int row,int col,boolean visit[][],int threshold){
+        int val=getVal(row,col);
+        if(row<0||col<0||row>=rows||col>=cols||visit[row][col]||val>threshold)
+            return false;
+        visit[row][col]=true;
+        count++;
+        if(next(rows,cols,row+1,col,visit,threshold)||next(rows,cols,row-1,col,visit,threshold)||
+              next(rows,cols,row,col+1,visit,threshold)||next(rows,cols,row,col-1,visit,threshold))
+            return true;
+        return false;
+    }
+    
+    private int getVal(int row,int col){
+        int sum1=0;
+        int sum2=0;
+        while(row!=0){
+            sum1=sum1+row%10;
+            row=row/10;
+        }
+        while(col!=0){
+            sum2=sum2+col%10;
+            col=col/10;
+        }
+        return sum1+sum2;
+    }
+}

@@ -1,0 +1,32 @@
+Fibonacci 数列
+法一：
+public class Solution {
+    public int Fibonacci(int n) {
+        if(n==0)
+            return 0;
+        else if(n==1)
+            return 1;
+        else 
+            return Fibonacci(n-1)+Fibonacci(n-2);
+    }
+}
+法二：
+public class Solution {
+    public int Fibonacci(int n) {
+        int pre=0;
+        int mid=0;
+        int cur=0;
+        if(n==0)
+            return 0;
+        if(n==1)
+            return 1;
+        mid=1;
+        for(int i=2;i<=n;i++){
+            cur=pre+mid;
+            pre=mid;
+            mid=cur;
+        }
+        return cur;
+        
+    }
+}

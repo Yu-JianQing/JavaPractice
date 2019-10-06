@@ -1,0 +1,27 @@
+//丑数
+public class Solution {
+    public int GetUglyNumber_Solution(int index) {
+        if(index<=0)
+            return 0;
+        int num[]=new int[index];
+        num[0]=1;
+        int t1=0,t2=0,t3=0;
+        int count=1;
+        while(count<index){
+            num[count]=getMin(num[t1]*2,num[t2]*3,num[t3]*5);
+            if(num[count]==num[t1]*2)
+                t1++;
+            if(num[count]==num[t2]*3)
+                t2++;
+            if(num[count]==num[t3]*5)
+                t3++;
+            count++;
+        }
+        return num[index-1];
+    }
+    private int getMin(int i,int j,int k){
+        int min=i>j?j:i;
+        min=min>k?k:min;
+        return min;
+    }
+}

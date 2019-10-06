@@ -1,0 +1,20 @@
+冒泡排序
+public class BubbleSort {
+	
+	private void swap(int num[],int index1,int index2){
+		int t=num[index1];
+		num[index1]=num[index2];
+		num[index2]=t;
+	}
+	
+	public int[] bubbleSort(int num[]){
+		for (int i = 0; i < num.length; i++) {
+			for (int j = 0; j < num.length-i-1; j++) {
+				if(num[j]>num[j+1])
+					swap(num, j, j+1);
+			}
+		}
+		return num;
+	}
+	
+}

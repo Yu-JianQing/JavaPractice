@@ -1,0 +1,23 @@
+和为S的两个数字
+import java.util.ArrayList;
+public class Solution {
+    private ArrayList<Integer> list=new ArrayList<Integer>();
+    public ArrayList<Integer> FindNumbersWithSum(int [] array,int sum) {
+        if(array==null)
+            return list;
+        int start=0;
+        int end=array.length-1;
+        while(start<end){
+            if(array[start]+array[end]==sum){
+                list.add(array[start]);
+                list.add(array[end]);
+                return list;
+            }
+            if(start<end&&array[start]+array[end]>sum)
+                end--;
+            if(start<end&&array[start]+array[end]<sum)
+                start++;
+        }
+        return list;
+    }
+}

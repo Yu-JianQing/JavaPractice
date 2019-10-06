@@ -1,0 +1,23 @@
+滑动窗口的最大值
+import java.util.ArrayList;
+public class Solution {
+    private ArrayList<Integer> list=new ArrayList<Integer>();
+    public ArrayList<Integer> maxInWindows(int [] num, int size)
+    {
+        if(size==0||num==null)
+			return list;
+		for (int i = 0; i < num.length-size+1; i++) {
+			int max=findMax(num, i, i+size-1);
+			list.add(max);
+		}
+		return list;
+    }
+    private int findMax(int num[],int start,int end){
+		int max=num[start];
+		for (int i = start; i <=end; i++) {
+			if(num[i]>=max)
+				max=num[i];
+		}
+		return max;
+	}
+}

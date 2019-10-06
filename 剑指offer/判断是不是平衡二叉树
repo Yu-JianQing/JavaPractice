@@ -1,0 +1,19 @@
+判断是不是平衡二叉树
+public class Solution {
+    private boolean isBalance=true;
+    public boolean IsBalanced_Solution(TreeNode root) {
+        if(root==null)
+            return true;
+        getDeep(root);
+        return isBalance;
+    }
+    public int getDeep(TreeNode root){
+        if(root==null)
+            return 0;
+        int max1=1+getDeep(root.left);
+        int max2=1+getDeep(root.right);
+        if(Math.abs(max1-max2)>1)
+            isBalance=false;
+        return max1>max2?max1:max2;
+    }
+}

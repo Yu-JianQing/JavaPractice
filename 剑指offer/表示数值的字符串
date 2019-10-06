@@ -1,0 +1,38 @@
+表示数值的字符串
+public class Solution {
+    private int index=0;
+    public boolean isNumeric(char[] str) {
+        if(str==null)
+            return false;
+        boolean intPart=true;
+        boolean pointPart=true;
+        boolean ePart=true;
+        boolean isEnd=true;
+        intPart=isSignNum(str);
+        if(index<str.length&&str[index]=='.'){
+            index++;
+            pointPart=isUnsignNum(str);
+        }
+        if(index<str.length&&(str[index]=='e'||str[index]=='E')){
+            index++;
+            ePart=isSignNum(str);
+        }
+        if(index!=str.length)
+            isEnd=false;
+        return (intPart||pointPart)&&ePart&&isEnd;
+    }
+    private boolean isUnsignNum(char str[]){
+        int count=0;
+        while(index<str.length&&str[index]>='0'&&str[index]<='9'){
+            count++;
+            index++;
+        }
+        return count>0?true:false;
+    }
+    
+    private boolean isSignNum(char str[]){
+        if(index<str.length&&(str[index]=='+'||str[index]=='-'))
+            index++;
+        return isUnsignNum(str);
+    }
+}

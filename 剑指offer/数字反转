@@ -1,0 +1,21 @@
+解法一：827328929数字反转，不能使用类库，不能使用数组。
+解法二：采用数据结构栈结构，从尾数字开始依次压栈，再依次把栈中数据取出。
+public class Main {
+	public long reverse(long num){
+		long index=0;
+		long sum=0;
+		long x=num;
+		while(x%10!=0){
+			x=x/10;
+			index++;
+		}
+		index--;//这里--是因为9000=9*10^3而不是4
+		while(num%10!=0){
+			long last=num%10;
+			sum=sum+(long) (last*Math.pow(10, index));
+			index--;
+			num=num/10;
+		}
+		return sum;
+	}
+}

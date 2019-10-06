@@ -1,0 +1,29 @@
+把数组排成最小的数
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+public class Solution {
+    public String PrintMinNumber(int [] numbers) {
+        if(numbers==null||numbers.length==0)
+            return "";
+        String str[]=new String[numbers.length];
+        for(int i=0;i<numbers.length;i++)
+            str[i]=String.valueOf(numbers[i]);
+        Arrays.sort(str,new Comparator<String>(){//用了比较接口
+            public int compare(String s1,String s2){
+                String x=s1+s2;
+                String y=s2+s1;
+                return x.compareTo(y);
+            }
+        });
+        StringBuffer buffer=new StringBuffer();
+        for(int i=0;i<str.length;i++)
+            buffer.append(str[i]);
+        return buffer.toString();
+    }
+}
+注：比较接口Comparator的用法
+接口中的compare方法是定义排序规则的，结果>0则s1>s2，s1
+若 a＋b<b+a  a排在在前 的规则排序,
+ 如 2 21 因为 212 < 221 所以 排序后为 21 2 
+排后面否则排前面。结合中的相邻的两两比较进行排序，有些类似冒泡排序。

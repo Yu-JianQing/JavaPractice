@@ -1,0 +1,31 @@
+两组无序的数组求交集
+import java.util.ArrayList;
+import java.util.HashMap;
+public class Main {
+	public int[] getIn(int a[],int b[]){
+		int c[]=null;
+		ArrayList<Integer> list=new ArrayList<Integer>();
+		HashMap<Integer, Integer> map=new HashMap<Integer, Integer>();
+		for(int i=0;i<a.length;i++){
+			if(map.get(a[i])==null)
+				map.put(a[i], 1);
+			else
+				map.put(a[i], map.get(a[i])+1);
+		}
+		for(int i=0;i<b.length;i++){
+			if(map.get(b[i])==null)
+				map.put(b[i], 1);
+			else
+				map.put(b[i], map.get(b[i])+1);
+		}
+		for(int i:map.keySet()){
+			if(map.get(i)>1)
+				list.add(i);
+		}
+		
+		c=new int[list.size()];
+		for(int i=0;i<list.size();i++)
+			c[i]=list.get(i);
+		return c;
+	}
+}

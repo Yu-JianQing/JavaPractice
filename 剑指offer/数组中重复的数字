@@ -1,0 +1,29 @@
+数组中重复的数字
+public class Solution {
+    // Parameters:
+    //    numbers:     an array of integers
+    //    length:      the length of array numbers
+    //    这里要特别注意~返回任意重复的一个，赋值duplication[0]
+    public boolean duplicate(int numbers[],int length,int [] duplication) {
+        if(numbers==null||length==0)
+            return false;
+        int dindex=0;
+        for(int i=0;i<length;i++){
+            if(numbers[i]==i)
+                continue ;
+            int index=numbers[i];
+            if(numbers[i]==numbers[index]){
+                duplication[dindex++]=numbers[i];
+                return true;
+            }else
+                swap(numbers,i,index);
+        }
+        return false;
+    }
+    public void swap(int numbers[],int i,int j){
+        int t=numbers[i];
+        numbers[i]=numbers[j];
+        numbers[j]=t;
+    }
+    
+}

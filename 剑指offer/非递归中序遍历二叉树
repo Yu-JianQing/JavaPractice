@@ -1,0 +1,12 @@
+非递归中序遍历二叉树
+if(pRootOfTree==null)
+            return null;
+        TreeNode node=pRootOfTree;
+        while(node!=null||!stack.isEmpty()){
+            while(node!=null){
+                stack.push(node);
+                node=node.left;
+            }
+            node=stack.pop();
+            node=node.right;
+        }

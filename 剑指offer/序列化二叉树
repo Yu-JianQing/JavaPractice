@@ -1,0 +1,36 @@
+/*序列化二叉树
+public class TreeNode {
+    int val = 0;
+    TreeNode left = null;
+    TreeNode right = null;
+    public TreeNode(int val) {
+        this.val = val;
+    }
+}
+*/
+public class Solution {
+    //private StringBuffer buffer=new StringBuffer();
+    private int count=-1;
+    String Serialize(TreeNode root) {
+        StringBuffer buffer=new StringBuffer();
+        if(root==null){
+            buffer.append("#,");
+            return buffer.toString();
+        }
+        buffer.append(root.val+",");
+        buffer.append(Serialize(root.left));
+        buffer.append(Serialize(root.right));
+        return buffer.toString();
+  }
+    TreeNode Deserialize(String str) {
+        count++;
+        String strs[]=str.split(",");
+        TreeNode root=null;
+        if(!strs[count].equals("#")){
+            root=new TreeNode(Integer.parseInt(strs[count]));
+            root.left=Deserialize(str);
+            root.right=Deserialize(str);
+        }
+        return root;
+  }
+}

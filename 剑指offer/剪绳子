@@ -1,0 +1,28 @@
+动态规划，剪绳子
+public class Solution {
+    public int cutRope(int target) {
+        if(target<2)
+            return 0;
+        if(target==2)
+            return 1;
+        if(target==3)
+            return 2;
+        int res[]=new int[target+1];//+1是为了除res【0】
+        res[0]=0;
+        res[1]=1;
+        res[2]=2;
+        res[3]=3;
+        
+        int max=0;
+        for(int i=4;i<res.length;i++){
+            max=0;
+            for(int j=0;j<i;j++){
+                int num=res[j]*res[i-j];
+                max=max>num?max:num;
+            }
+            res[i]=max;
+        }
+        return max;
+    }
+}
+//f(i)=f(j)*f(i-j);  j最大到达i-1

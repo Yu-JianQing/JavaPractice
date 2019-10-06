@@ -1,0 +1,33 @@
+/*两个链表的第一个公共节点
+public class ListNode {
+    int val;
+    ListNode next = null;
+    ListNode(int val) {
+        this.val = val;
+    }
+}*/
+import java.util.Stack;
+public class Solution {
+    private Stack<ListNode> stack1=new Stack<ListNode>();
+    private Stack<ListNode> stack2=new Stack<ListNode>();
+    public ListNode FindFirstCommonNode(ListNode pHead1, ListNode pHead2) {
+        ListNode com=null;
+        if(pHead1==null||pHead2==null)
+            return com;
+        while(pHead1!=null){
+            stack1.push(pHead1);
+            pHead1=pHead1.next;
+        }
+        while(pHead2!=null){
+            stack2.push(pHead2);
+            pHead2=pHead2.next;
+        }
+        while(!stack1.isEmpty()&&!stack2.isEmpty()){
+            ListNode node1=stack1.pop();
+            ListNode node2=stack2.pop();
+            if(node1.val==node2.val)
+                com=node1;
+        }
+        return com;
+    }
+}

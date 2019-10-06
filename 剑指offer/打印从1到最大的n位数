@@ -1,0 +1,80 @@
+打印从1到最大的n位数
+public class Solution{
+	private char[] addOne(char num[]){//每次只加1
+		boolean carry=false;//判断是否有进位
+		for (int i = num.length-1; i >= 0; i--) {
+			if(i==num.length-1){//最低位+1
+				int last=num[i]-'0';
+				last++;
+				if(last>=10){//最低位+1后如果进位了
+					carry=true;
+					num[i]='0';//最低位变0
+					continue ;
+				}
+				num[i]=(char) ('0'+last);//没进位就+1后的值
+			}else {//当不是最低位时要处理最低位+1后的进位
+				if(carry==false)//没有进位
+					break ;
+				int cur=num[i]-'0';
+				cur++;//进位了当前位+1
+				if(cur>=10){//如果当前位又进位了
+					carry=true;
+					num[i]='0';//置0
+					continue ;//继续处理下一位
+				}
+				carry=false;//当前位没有进位
+				num[i]=(char) ('0'+cur);
+			}
+		}
+		return num;
+	}
+	
+	private void print(char num[]){
+		boolean isfirst=true;//判断是否是开头
+		for (int i = 0; i < num.length; i++) {
+			if(isfirst&&num[i]=='0')//如果是以0开头
+				continue;
+			isfirst=false;//否则正常打印
+			System.out.print(num[i]);
+		}
+		System.out.println();
+	}
+	
+	public void printNDigits(int n){
+		if(n<=0)
+			return ;
+		char num[]=new char[n];
+		for (int i = 0; i < num.length; i++) 
+			num[i]='0';
+		char max[]=new char[n];
+		for (int i = 0; i < max.length; i++) 
+			max[i]='9';
+		
+		while(addOne(num)[0]<='9'){
+			print(num);
+			if(new String(num).equals(new String(max)))
+				break;
+		}
+	}
+	/*第二种方法*/
+	private void print2(char num[],int curIndex){
+		if(curIndex==num.length-1){//如果排列时达到了最后一位
+			print(num);
+			return ;
+		}
+		for (int i = 0; i < 10; i++) {
+			num[curIndex+1]=(char) (i+'0');//从第二位开始安置
+			print2(num, curIndex+1);//安置下一位
+		}
+	}
+	
+	public void printNDigits2(int n){
+		if(n<=0)
+			return ;
+		char num[]=new char[n];
+		for (int i = 0; i < 10; i++) {
+			num[0]=(char) ('0'+i);//将第一位安置，0-9的排列
+			print2(num, 0);//剩下的全排列
+		}
+		
+}

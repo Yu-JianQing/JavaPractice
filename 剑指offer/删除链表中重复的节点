@@ -1,0 +1,31 @@
+/*删除链表中重复的节点
+ public class ListNode {
+    int val;
+    ListNode next = null;
+
+    ListNode(int val) {
+        this.val = val;
+    }
+}
+*/
+public class Solution {
+    public ListNode deleteDuplication(ListNode pHead)
+    {
+        ListNode node=new ListNode(0);
+        node.next=pHead;
+        ListNode pre=node;
+        ListNode cur=pHead;
+        while(cur!=null&&cur.next!=null){
+            if(cur.val==cur.next.val){
+                int val=cur.val;
+                while(cur!=null&&cur.val==val)
+                    cur=cur.next;
+                pre.next=cur;
+            }else{
+                pre=cur;
+                cur=cur.next;
+            }
+        }
+        return node.next;
+    }
+}

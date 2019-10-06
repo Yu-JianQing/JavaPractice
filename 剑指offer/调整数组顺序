@@ -1,0 +1,16 @@
+调整数组顺序使奇数位于偶数前面
+public class Solution {
+    public void reOrderArray(int [] array) {
+        for(int i=0;i<array.length;i++){
+            for(int j=0;j<array.length-i-1;j++){
+                if(array[j]%2==0&&array[j+1]%2==1)
+                    swap(array,j,j+1);
+            }
+        }
+    }
+    private void swap(int array[],int i,int j){
+		int t=array[i];
+		array[i]=array[j];
+		array[j]=t;
+	}
+}

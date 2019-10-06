@@ -1,0 +1,28 @@
+连续子数组的最大和
+public class Solution {
+    public int FindGreatestSumOfSubArray(int[] array) {
+        if(array==null||array.length<=1)
+            return 0;
+        int max=array[0];
+        int start=0;
+        int end=0;
+        while(end!=array.length){
+            int sum=getSum(array,start,end);
+            if(sum>0){
+                end++;//往后走
+            }else{
+                end++;//往后走
+                start=end;
+            }
+            max=max>sum?max:sum;
+        }
+        return max;
+    }
+    private int getSum(int array[],int start,int end){
+        int sum=0;
+        for(int i=start;i<=end;i++)
+            sum=sum+array[i];
+        return sum;
+    }
+    
+}

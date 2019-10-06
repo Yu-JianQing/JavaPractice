@@ -1,0 +1,30 @@
+把字符串转换成整数
+public class Solution {
+    public int StrToInt(String str) {
+        if(str==null||str.length()==0)
+            return 0;
+        char cs[]=str.toCharArray();
+        int symbol=1;
+        int start=0;
+        if(cs[0]<'0'||cs[0]>'9'){
+            symbol=getSymbol(cs[0]);//考虑第一个符号
+            start=1;//考虑从0开始还是从1开始
+        }
+        int sum=0;
+        for(int i=start;i<cs.length;i++){
+            if(cs[i]<'0'||cs[i]>'9')
+                return 0;
+            int num=cs[i]-48;
+            sum=sum+num*(int)Math.pow(10,cs.length-1-i);
+        }
+        return symbol*sum;
+    }
+    private int getSymbol(char c){
+        if(c=='+')
+            return 1;
+        else if(c=='-')
+            return -1;
+        else
+            return 0;
+    }
+}

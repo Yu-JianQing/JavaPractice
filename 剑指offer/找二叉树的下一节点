@@ -1,0 +1,36 @@
+/*找二叉树的下一节点
+public class TreeLinkNode {
+    int val;
+    TreeLinkNode left = null;
+    TreeLinkNode right = null;
+    TreeLinkNode next = null;
+
+    TreeLinkNode(int val) {
+        this.val = val;
+    }
+}
+*/
+public class Solution {
+    public TreeLinkNode GetNext(TreeLinkNode pNode)
+    {
+        if(pNode==null)
+            return null;
+        TreeLinkNode node=pNode.right;
+        TreeLinkNode p=node;
+        if(node!=null){
+            while(p.left!=null)
+                p=p.left;
+            return p;
+        }else{
+            TreeLinkNode parent=pNode.next;//next是父节点
+            TreeLinkNode q=pNode;
+            while(parent!=null){
+                if(q==parent.left)
+                    return parent;
+                q=parent;
+                parent=parent.next;
+            }
+        }
+        return null;
+    }
+}

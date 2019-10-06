@@ -1,0 +1,22 @@
+数值的整数次方
+public class Solution {
+    public double Power(double base, int exponent) {
+        if(exponent>=0)
+            return calculate(base,exponent);
+        else {
+            if(base==0)
+                return 1;
+            else{
+                double rs=calculate(base,-exponent);
+                return 1.0/rs;
+            }
+        }
+  }
+    
+    private double calculate(double base, int exponent){
+        double sum=1;
+        for(int i=1;i<=exponent;i++)
+            sum=sum*base;
+        return sum;
+    }
+}
