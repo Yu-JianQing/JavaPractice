@@ -1,0 +1,37 @@
+//储物柜
+import java.util.concurrent.atomic.AtomicInteger;
+
+public class Solution {
+	private static AtomicInteger index=new AtomicInteger(0);
+	private static ThreadLocal<MyLog> local=new ThreadLocal<MyLog>();
+	
+	static class MyLog{
+		private int id;
+		public MyLog(int id){this.id=id;}
+		public void print(){
+			System.out.println(Thread.currentThread().getName()+"   "+id);
+		}
+		public int getId(){
+			return this.id;
+		}
+	}
+	
+	static class Task implements Runnable{
+		@Override
+		public void run() {
+			MyLog log=local.get();
+			if(log==null){
+				log=new MyLog(index.incrementAndGet());
+				local.set(log);
+			}
+			log.print();
+		}
+	}
+	
+	
+	public static void main(String[] args) throws InterruptedException {
+		for(int i=0;i<5;i++)
+			new Thread(new Task()).start();
+	}
+	
+}

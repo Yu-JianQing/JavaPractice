@@ -7,7 +7,7 @@ public class Solution {
 	}
 	
 	static class Logs{
-		ThreadLocal<MyLog> logs=new ThreadLocal<H.MyLog>();
+		ThreadLocal<MyLog> logs=new ThreadLocal<MyLog>();
 		public void print(){
 			MyLog log=logs.get();
 			if(log==null){
