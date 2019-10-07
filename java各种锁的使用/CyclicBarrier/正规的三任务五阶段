@@ -1,0 +1,49 @@
+//正规的三任务五阶段
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class Main {
+	private static CountDownLatch cdl=new CountDownLatch(3);
+	private static CyclicBarrier barrier=new CyclicBarrier(3, new BarrierAction());
+	
+	static class BarrierAction implements Runnable{
+		@Override
+		public void run() {
+			System.out.println(Thread.currentThread().getName()+"  barrier action");
+		}
+	}
+	
+	static class MyTask implements Runnable{
+		@Override
+		public void run() {
+			try {
+				barrier.await();
+				for(int i=0;i<5;i++){
+					System.out.println(Thread.currentThread().getName()+"   the task "+ i);
+					barrier.await();
+				}
+				cdl.countDown();
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
+	}
+	
+	public static void main(String[] args) {
+
+		ExecutorService service=Executors.newFixedThreadPool(3);
+		
+		for(int i=0;i<3;i++)
+			service.execute(new MyTask());
+		
+		try {
+			cdl.await();
+		} catch (Exception e) {}
+		
+		System.out.println("end");
+		
+	}
+}
+
