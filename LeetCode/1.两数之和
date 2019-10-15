@@ -1,0 +1,23 @@
+给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那两个整数，并返回他们的数组下标。
+import java.util.HashMap;
+
+public class Solution {	
+	public int[] twoSum(int[] nums, int target) {
+        int rs[]=new int[2];
+        HashMap<Integer, Integer> map=new HashMap<Integer, Integer>();
+
+        int x=0;
+        for(int i=0;i<nums.length;i++){
+        	x=target-nums[i];
+        	if(map.containsKey(x)){
+        		rs[0]=map.get(x);
+        		rs[1]=i;
+        		break ;
+        	}
+        	map.put(nums[i], i);
+        }
+		return rs;
+    }
+}
+
+注意：不能先将元素放入map，应该是边查询边放。在放入之前检查，没有就放入否则就找到。
