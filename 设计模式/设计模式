@@ -1,0 +1,126 @@
+创建模式（Creational patterns）
+
+
+1.单例（Singleton），创造型方法，每次调用返回全局唯一对象。
+java.lang.Runtime#getRuntime()
+java.lang.System#getSecurityManager()
+
+
+2. 原型（Prototype），创造型方法，调用该方法时返回同一类型的不同对象。
+
+java.lang.Object#clone()
+
+
+3. 构建者（Builder），创造型方法，调用该方法返回同一个对象。
+
+java.lang.StringBuilder#append()
+
+
+4. 工厂方法（Factory method）, 创造型方法，调用该方法返回某个接口的具体实现。
+
+java.util.Calendar#getInstance()
+java.nio.charset.Charset#forName()
+
+
+5. 抽象工厂（Abstract factory），创造型方法，调用该方法返回一个抽象工厂的具体实现，该实例又可以创建某个接口的具体实现。
+
+javax.xml.parsers.DocumentBuilderFactory#newInstance()
+结构模式（Structural patterns）
+
+
+6. 适配器（Adapter），创造型方法，把给定的对象转化成其他类型对象。
+
+java.util.Arrays#asList()
+java.io.InputStreamReader(InputStream)
+
+
+7. 桥接（Bridge）
+
+暂无
+
+
+
+8. 组合（Composite），行为型方法，接受同一类型的其他实例，组成复合对象。
+
+java.awt.Container#add(Component)
+
+
+9. 装饰器（Decorator ），创造型方法，接受同一类型的其他实例并返回一个增强实例。
+
+java.util.Collections, the checkedXXX(), synchronizedXXX() and unmodifiableXXX()methods.
+
+
+10. 门面（Facade），行为型方法，内在依赖多个其他类型的实例。
+
+javax.faces.context.ExternalContext, which internally uses ServletContext, HttpSession, HttpServletRequest, HttpServletResponse, etc.
+
+
+11. 享元（Flyweight），创造型方法，返回缓存的不可变实例。
+
+java.lang.Integer#valueOf(int)
+
+
+12. 代理（Proxy），创造型方法，返回给定类型的其他类型实现。
+
+java.lang.reflect.Proxy
+行为模式（Behavioral patterns）
+
+
+13. 责任链（Chain of responsibility ），行为式方法，调用队列中其他实现的相同方法。
+
+java.util.logging.Logger#log()
+javax.servlet.Filter#doFilter()
+
+
+14. 命令（Command），行为式方法，调用者和被调用者解耦，把被调用者封装成统一形式。
+
+All implementations of java.lang.Runnable
+All implementations of javax.swing.Action
+
+
+15. 解释器（Interpreter），行为式方法，返回一个和输入结构不同的其他类型实例。
+
+java.util.Pattern
+java.text.Normalizer
+
+
+16. 迭代器（Iterator ），行为式方法，可以顺序的访问一系列对象。
+
+All implementations of java.util.Iterator
+All implementations of java.util.Enumeration
+
+
+17. 中间人（Mediator） ，行为式方法，通常和命令模式一起使用，接收一个命令对象，并把它转交给内在依赖处理。
+
+java.util.concurrent.Executor#execute()
+
+
+18. 备忘录（Memento ），行为式方法，整个对象可以用单一字段表示，外界可以通过这个字段恢复整个对象。
+
+java.util.Date (the setter methods do that, Date is internally represented by a long value)
+All implementations of java.io.Serializable
+
+
+19. 观察者（Observer (or Publish/Subscribe)），行为式方法，当被观察者的该方法被调用时，被观察者会调用观察者（们）的某个方法。
+
+java.util.Observer/java.util.Observable (rarely used in real world though)
+
+
+20. 状态（State），行为式方法，外界可以设置状态，状态不同行为不同。
+
+javax.faces.lifecycle.LifeCycle#execute()
+
+
+21. 策略（Strategy），行为式方法，接收实现了某个接口的具体类（不保存这个实例的状态），并调用具体的实现方法。
+
+java.util.Comparator#compare(), executed by among others Collections#sort().
+
+
+22. 模板方法（Template method），行为式方法，抽象类或者接口里面有默认实现。
+
+All non-abstract methods of java.util.AbstractList, java.util.AbstractSet and java.util.AbstractMap.
+
+
+23. 访问者（Visitor），行为式方法，类A与类Visitor相互引用，调用A的某个方法时，A会调用Visitor的特定方法，该方法对A执行相应策略。
+
+java.nio.file.FileVisitor and SimpleFileVisitor
